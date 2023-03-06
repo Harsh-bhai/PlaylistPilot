@@ -21,7 +21,7 @@ const Navbar = () => {
   const ref = useRef()
   return (
     <div>
-      <div className="navbar flex flex-col md:flex-row items-center bg-gray-800 md:p-2 shadow-lg py-4 ">
+      <div className="navbar flex flex-col md:flex-row items-center bg-gray-800 md:p-2  py-4 ">
      <div className=' top-0 left-0 absolute m-7 md:m-10 text-3xl font-thin md:hidden'> <GiHamburgerMenu onClick={toggle}  /></div>
         <Link href={"/"}><div className="flex title-font font-medium items-center md:justify-start justify-center text-gray-900 md:z-10 my-4 md:my-0 mx-10 cursor-pointer">
           <img src="logo.svg" alt="" />
