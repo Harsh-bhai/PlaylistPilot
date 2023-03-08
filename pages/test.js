@@ -1,13 +1,16 @@
-import React from "react";
+import React,{useEffect} from "react";
 
 const Test = () => {
+useEffect(() => {
   const searchBox = document.getElementById("search");
-  searchBox.addEventListener("input", () => {
-    searchBox.innerHTML = searchBox.innerHTML.replace(
-      /@([a-zA-Z0-9]+)/,
-      "<span class='red'>$1</span>"
-    );
-  });
+  // searchBox.addEventListener("input", () => {
+  //   searchBox.innerHTML = searchBox.innerHTML.replace(
+  //     /@([a-zA-Z0-9]+)/,
+  //     "<span class='red'>$1</span>"
+  //   );
+  // });
+}, [])
+
   return (
     <div>
       <style jsx>
@@ -19,7 +22,7 @@ const Test = () => {
       </style>
       <div
         id="search"
-        style="height: 100px; width: 100px; background: grey;"
+        style={{height: '100px', width: '100px', background: 'grey'}}
         contenteditable=""
       ></div>
     </div>
