@@ -8,7 +8,7 @@ const Footer = () => {
       <div className="w-64 flex-shrink-0 md:mx-0 mx-auto text-center md:text-left">
         <a className="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">  
           
-          <img src="/vmartgreen.png" alt="" />
+          <img src="/logo.svg" alt="" />
         </a>
       </div>
       <div className="flex-grow justify-evenly flex  md:pl-20 -mb-10 md:mt-0 mt-10 md:text-left text-center">
