@@ -3,6 +3,8 @@ import Navbar from '@/components/navbar'
 import Footer from '@/components/footer'
 import Cookies from 'js-cookie'
 import { useState } from 'react'
+import axios from 'axios'
+import NextNProgress from 'nextjs-progressbar';
 
 export default function App({ Component, pageProps }) {
   const [reloadkey, setReloadkey] = useState(1)
@@ -14,7 +16,13 @@ export default function App({ Component, pageProps }) {
 
   return <>
   <Navbar/>
-  
+  <NextNProgress
+        color="#4f46e5"
+        startPosition={0.5}
+        stopDelayMs={300}
+        height={3}
+        showOnShallow={true}
+      />
   <Component {...pageProps} key={reloadkey} Logout={Logout} reloadkey={reloadkey} />
   <Footer/>
   </>
