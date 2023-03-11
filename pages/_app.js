@@ -3,7 +3,7 @@ import Navbar from '@/components/navbar'
 import Footer from '@/components/footer'
 import Cookies from 'js-cookie'
 import { useState } from 'react'
-import axios from 'axios'
+
 import NextNProgress from 'nextjs-progressbar';
 
 export default function App({ Component, pageProps }) {
