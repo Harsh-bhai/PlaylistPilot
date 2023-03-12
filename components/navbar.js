@@ -7,7 +7,7 @@ import { MdAccountCircle } from 'react-icons/md';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { AiFillCloseCircle } from 'react-icons/ai';
 import Link from 'next/link';
-const Navbar = () => {
+const Navbar = ({Logout}) => {
   const toggle = () => {
     if ((ref.current.classList.contains("-translate-x-full"))) {
       ref.current.classList.remove("-translate-x-full")
@@ -21,6 +21,7 @@ const Navbar = () => {
   const ref = useRef()
   return (
     <div>
+
       <div className="navbar flex flex-col md:flex-row items-center bg-gray-800 md:p-2  py-4 ">
      <div className=' top-0 left-0 absolute m-7 md:m-10 text-3xl font-thin md:hidden'> <GiHamburgerMenu onClick={toggle}  /></div>
         <Link href={"/"}><div className="flex title-font font-medium items-center md:justify-start justify-center text-gray-900 md:z-10 my-4 md:my-0 mx-10 cursor-pointer">
@@ -35,6 +36,7 @@ const Navbar = () => {
             {/* <Link  href={"/services"}><div onClick={toggle} className='hover:text-yellow-600 text-white cursor-pointer'>Services</div></Link> */}
             <Link  href={"/categories"}><div onClick={toggle} className= 'hover:text-yellow-600 text-white cursor-pointer'>Categories</div></Link>
             <Link  href={"/about"}><div onClick={toggle} className='hover:text-yellow-600 text-white cursor-pointer'>Contact Us</div></Link>
+            <div onClick={Logout} className='hover:text-yellow-600 text-white cursor-pointer'>Logout</div>
           </div>
         </div>
         {/* <button class=" text-white bg-yellow-500  mr-40  py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">Button</button> */}
