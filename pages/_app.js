@@ -5,11 +5,13 @@ import Cookies from 'js-cookie'
 import { useState } from 'react'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
-
+import { useRouter } from 'next/router'
 import NextNProgress from 'nextjs-progressbar';
 
+
+
 export default function App({ Component, pageProps }) {
+  const Router=useRouter()
   const [reloadkey, setReloadkey] = useState(1)
   const Logout= (  ) => {
     Cookies.remove("token")
@@ -24,6 +26,8 @@ export default function App({ Component, pageProps }) {
       progress: undefined,
       theme: "dark",
       });
+      Router.push(process.env.NEXT_PUBLIC_BASEURL)
+
   }
 
 

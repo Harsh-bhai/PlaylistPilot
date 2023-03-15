@@ -32,6 +32,7 @@ const Import = ({ Logout, reloadkey }) => {
   const redirectURI = `${process.env.NEXT_PUBLIC_BASEURL}/import`;
   const authEndpoint = "https://accounts.spotify.com/authorize";
   const responseType = "token";
+  const scope = "user-read-email user-library-read user-library-modify user-read-private user-read-playback-state user-modify-playback-state playlist-read-private playlist-modify-public playlist-modify-private user-follow-read user-follow-modify user-top-read user-read-recently-played streaming app-remote-control user-read-currently-playing user-read-playback-position ugc-image-upload"
 
   return (
     <div className="min-h-screen">
@@ -41,7 +42,7 @@ const Import = ({ Logout, reloadkey }) => {
       <div className="flex justify-center items-center space-x-10 my-40">
         {!token && (
           <Link
-            href={`${authEndpoint}?client_id=${process.env.NEXT_PUBLIC_clientId}&response_type=${responseType}&redirect_uri=${redirectURI}`}
+            href={`${authEndpoint}?client_id=${process.env.NEXT_PUBLIC_clientId}&response_type=${responseType}&redirect_uri=${redirectURI}&scope=${scope}`}
           >
             <button className=" text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded-full text-lg">
               Import from Spotify
