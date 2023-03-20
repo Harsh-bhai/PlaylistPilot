@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
+import { SlSocialSpotify } from 'react-icons/sl'
+
 
 const Import = ({ Logout, reloadkey }) => {
   const [token, setToken] = useState();
@@ -36,16 +38,16 @@ const Import = ({ Logout, reloadkey }) => {
 
   return (
     <div className="min-h-screen">
-      <p className="text-center text-white text-5xl font-bold my-10">
+      <p className="text-center text-white text-5xl font-bold mt-36">
         Import You Playlist
       </p>
-      <div className="flex justify-center items-center space-x-10 my-40">
+      <div className="flex justify-center items-center space-x-10 my-28">
         {!token && (
           <Link
             href={`${authEndpoint}?client_id=${process.env.NEXT_PUBLIC_clientId}&response_type=${responseType}&redirect_uri=${redirectURI}&scope=${scope}`}
           >
-            <button className=" text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded-full text-lg">
-              Import from Spotify
+            <button className="flex items-center text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded-full text-lg">
+            <SlSocialSpotify className="mr-2 text-3xl"/> Import from Spotify
             </button>
           </Link>
         ) }

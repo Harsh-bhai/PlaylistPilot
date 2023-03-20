@@ -1,4 +1,5 @@
 import Link from "next/link";
+// SlSocialSpotify
 
 // import Shootingstar from '@/components/shootingstar'
 
@@ -7,7 +8,7 @@ export default function Home() {
     <div className="min-h-screen bg-gray-800 flex flex-col py-40 items-center space-y-4">
       {/* <Shootingstar/> */}
       <div className="flex  font-bold justify-center  text-4xl  z-20 text-white">
-        Satisfy Your OCD
+        PlayList Pilot
       </div>
       <p className="text-2xl text-white">
         Load up, filter out and organize your playlists.
