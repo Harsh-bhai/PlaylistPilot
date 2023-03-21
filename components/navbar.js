@@ -34,15 +34,14 @@ const Navbar = ({Logout}) => {
           <div className="flex flex-col md:flex-row md:items-center md:space-x-8  mainitems my-24 md:my-4 space-y-6 md:space-y-0">
             <Link  href={"/about"}><div onClick={toggle} className='hover:text-yellow-600 text-white cursor-pointer'>About</div></Link>
             {/* <Link  href={"/services"}><div onClick={toggle} className='hover:text-yellow-600 text-white cursor-pointer'>Services</div></Link> */}
-            <Link  href={"/categories"}><div onClick={toggle} className= 'hover:text-yellow-600 text-white cursor-pointer'>Categories</div></Link>
             <Link  href={"/about"}><div onClick={toggle} className='hover:text-yellow-600 text-white cursor-pointer'>Contact Us</div></Link>
             <div onClick={Logout} className='hover:text-yellow-600 text-white cursor-pointer'>Logout</div>
           </div>
         </div>
         {/* <button class=" text-white bg-yellow-500  mr-40  py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">Button</button> */}
-        <div className=" account absolute top-1  md:top-[-5px] right-0 text-4xl p-6 cursor-pointer ">
-          <MdAccountCircle />
-        </div>
+        <Link href={'/profile'}><div className=" account absolute top-1  md:top-[-5px] right-0 text-4xl p-6 cursor-pointer ">
+          <MdAccountCircle className='text-gray-400' />
+        </div></Link>
       </div>
     </div>
 
