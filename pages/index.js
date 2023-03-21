@@ -13,7 +13,7 @@ export default function Home() {
         Load up, filter out and organize your playlists.
       </p>
       <Link href={"/import"}>
-        <button className=" text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded-full text-lg translate-y-10 ">
+        <button className=" text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded-full text-lg translate-y-5 ">
           LETS GO!
         </button>{" "}
       </Link>
