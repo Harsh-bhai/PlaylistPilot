@@ -7,6 +7,7 @@ import { MdAccountCircle } from 'react-icons/md';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { AiFillCloseCircle } from 'react-icons/ai';
 import Link from 'next/link';
+import Cookies from 'js-cookie';
 const Navbar = ({Logout}) => {
   const toggle = () => {
     if ((ref.current.classList.contains("-translate-x-full"))) {
@@ -40,7 +41,7 @@ const Navbar = ({Logout}) => {
         </div>
         {/* <button class=" text-white bg-yellow-500  mr-40  py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">Button</button> */}
         <Link href={'/profile'}><div className=" account absolute top-1  md:top-[-5px] right-0 text-4xl p-6 cursor-pointer ">
-          <MdAccountCircle className='text-gray-400' />
+          {Cookies.get('token')?<MdAccountCircle className='text-gray-400' />:<MdAccountCircle className='text-gray-400 hidden' />}
         </div></Link>
       </div>
     </div>

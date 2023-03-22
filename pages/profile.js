@@ -1,48 +1,67 @@
-import Cookies from 'js-cookie'
-import React from 'react'
+import Cookies from "js-cookie";
+import Link from "next/link";
+import React from "react";
 
-const Profile = ({user}) => {
-    console.log(user,"sjdflkfjg")
+const Profile = ({ user }) => {
+  console.log(user, "sjdflkfjg");
+  console.log(Cookies.get("token"));
   return (
-   <div className="text-white">
-    <div className="info flex justify-center space-x-40 items-center">
-    <div className="pfp m-8 relative">
-        <div className="img bg-black absolute translate-y-28">kajdlkjdas</div>
-        <img className=' z-20 rounded-full h-60 object-cover object-center w-60' src="https://media.istockphoto.com/id/1300972574/photo/millennial-male-team-leader-organize-virtual-workshop-with-employees-online.jpg?b=1&s=170667a&w=0&k=20&c=96pCQon1xF3_onEkkckNg4cC9SCbshMvx0CfKl2ZiYs=" alt="" />
+    <div className="flex place-content-center place-items-center w-screen h-screen bg-gray-800 overflow-hidden">
+      <div className="flex px-5 py-10 border-4 m-2 rounded-2xl ">
+        <div className="info text-white justify-center items-center sm:flex sm:space-x-40 m-auto">
+          <div className="pfp m-10 ">
+            <img
+              className="rounded-full h-60 w-60 sm:h-96 sm:w-96 object-cover object-center border-4 border-white"
+              src={`${user.images[0].url}`}
+              alt=""
+            />
+          </div>
+          <div className="about flex flex-col items-center space-y-3 tracking-wider sm:space-y-5">
+            <p className="text-4xl sm:text-5xl font-semibold">
+              {user.display_name}
+            </p>
+            <div className="flex">
+              <p className="text-2xl">Spotify ID :</p>{" "}
+              <p className="text-green-400 text-2xl">{user.id}</p>
+            </div>
+            <div className="flex">
+              <p className="text-2xl">Email ID :</p>{" "}
+              <p className="text-green-400 text-2xl">{user.email}</p>
+            </div>
+            <div className="flex">
+              <p className="text-2xl">Country :</p>{" "}
+              <p className="text-green-400 text-2xl">{user.country}</p>
+            </div>
+            <div className="flex">
+              <p className="text-2xl">Followers :</p>{" "}
+              <p className="text-green-400 text-2xl">{user.followers.total}</p>
+            </div>
+            <div className="flex flex-wrap justify-center">
+              <p className="text-2xl  ">Spotify profile URL  : </p>{" "}
+              <a target={'_blank'} href={user.external_urls.spotify} className="text-green-400 text-2xl">
+                {user.external_urls.spotify}
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div className='about flex flex-col space-y-2'>
-        <p className='text-4xl font-semibold'>{user.display_name}</p>
-        <p>{user.id}</p>
-        <p>{user.email}</p>
-    </div>
-    </div>
-    <div className='moreinfo'>
+  );
+};
 
-<p>Country:</p>
-<p>Follwers:</p>
-<p>Spotify profile URL:</p>
-    </div>
-   </div>
-
-   
-
-
-
-  )
-}
-
-export default Profile
+export default Profile;
 
 export async function getServerSideProps(context) {
-    let a = await fetch("https://api.spotify.com/v1/me",{
-        method:"GET",
-        headers:{
-            'Content-Type':'application/json',
-            "Authorization":`Bearer BQAzRLDe2EW9HfPf0RSqWrdj2VGEAzDiwjndsvuh8vdo9RnGSONTNgIDbEs_RpReyxbUA1wg7wUFmPRNwW3MniLGhHSRQ5l9rIHsUWs068KfNxkzTIjXZzmYP28RpDLRZdQODfZkgCSt4PhNoD4EuvBArTKJZqXz6XJKysaUUEnuVQZAUIcKi8xTEzkdaCaIAUEPHmIUlhiyqP-JB5e_boxGP3ZRPC9ZOZLkFmej3oHfwLzMPhJB5_1ZgehcbQ7CQtyWsnXKi6N20ujZkMu2J6icBbcULNgTymXEa1XKzJ9g1-pHVlvKhOCar_VutHYXu2wfgM9xCJudPmrF`
-        }
-    })
-    let user= await a.json()
-    return {
-      props: {user}, // will be passed to the page component as props
-    }
-  }
+  let a = await fetch("https://api.spotify.com/v1/me", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${context.req.cookies["token"]}`,
+    },
+  });
+  let user = await a.json();
+
+  return {
+    props: { user }, // will be passed to the page component as props
+  };
+}
