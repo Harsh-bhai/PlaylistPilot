@@ -9,32 +9,99 @@ import { SlSocialSpotify } from 'react-icons/sl'
 const Import = ({ Logout, reloadkey }) => {
   const [token, setToken] = useState();
   const Router = useRouter();
+const [access_token, setAccess_token] = useState()
+const [refresh_token, setrefreshtoken] = useState()
 
+
+//   useEffect(() => {
+//      console.log("hi i am usestate");
+//      const hash = window.location.hash;
+//      let token = Cookies.get("token");
+//      if (!token && hash) {
+//        token = hash
+//          .substring(1)
+//          .split("&")
+//          .find((elem) => elem.startsWith("access_token"))
+//          .split("=")[1];
+//        window.location.hash = "";
+//        Cookies.set("token", token, { expires: 30 });
+//        setToken(token);
+//      }
+//      else if (token){
+//        Router.push(`/options`)
+//      }
+//      console.log(!token)
+//      console.log()
+//    }, []);
+
+  
   useEffect(() => {
-    console.log("hi i am usestate");
-    const hash = window.location.hash;
-    let token = Cookies.get("token");
-    if (!token && hash) {
-      token = hash
-        .substring(1)
-        .split("&")
-        .find((elem) => elem.startsWith("access_token"))
-        .split("=")[1];
-      window.location.hash = "";
-      Cookies.set("token", token, { expires: 30 });
-      setToken(token);
-    }
-    else if (token){
-      Router.push(`/options`)
-    }
-    console.log(!token)
-    console.log()
-  }, []);
+     console.log("hi i am usestate");
+     const hash = window.location.href;
+     let token = Cookies.get("token");
+try {
+     if (!token && hash) {
+          token = hash.split('?')[1].substring(5);
+         //  window.location.href = `${process.env.NEXT_PUBLIC_BASEURL}/import`;
+          Cookies.set("token", token, { expires: 30 });
+          setToken(token);
+          getRefreshToken()
+        }
+        else if (token){
+          Router.push(`/options`)
+        }      
+        getRefreshToken()
+} catch (error) {
+     console.log(error)
+}
+
+   }, []);
+
+
+
+   
+
+
+const getRefreshToken= async(  ) => {
+  
+     
+console.log("getrefreshtoken is here")
+       let a = await fetch(`https://accounts.spotify.com/api/token?code=${Cookies.get('token')}&redirect_uri=${redirectURI}&grant_type=authorization_code`,{
+          headers: {
+               "Authorization": `Basic ${Buffer.from(`${process.env.NEXT_PUBLIC_clientId}:${process.env.NEXT_PUBLIC_client_secret}`).toString('base64')}`,
+               "Content-Type":'application/x-www-form-urlencoded'
+             },
+             method:"POST"
+       })
+       let rtoken=await a.json().refresh_token;
+       console.log(rtoken,"refreshtoken")
+       setrefreshtoken(rtoken)
+
+        let b = await fetch(`https://accounts.spotify.com/api/token?refresh_token=${refresh_token}&grant_type=refresh_token`,{
+          headers: {
+               "Authorization": `Basic ${Buffer.from(`${process.env.client_id}:${process.env.client_secret}`).toString('base64')}`,
+               "Content-Type":'application/x-www-form-urlencoded'
+             },
+             method:"POST"
+       })
+       let atoken=await b.json().access_token
+       setAccess_token(atoken)
+       Cookies.set("access_token",access_token)
+       console.log(Cookies.get('access_token'))
+}
+
 
   const redirectURI = `${process.env.NEXT_PUBLIC_BASEURL}/import`;
   const authEndpoint = "https://accounts.spotify.com/authorize";
-  const responseType = "token";
+  const responseType = "code";
   const scope = "user-read-email user-library-read user-library-modify user-read-private user-read-playback-state user-modify-playback-state playlist-read-private playlist-modify-public playlist-modify-private user-follow-read user-follow-modify user-top-read user-read-recently-played streaming app-remote-control user-read-currently-playing user-read-playback-position ugc-image-upload"
+
+
+
+
+
+
+
 
   return (
     <div className="min-h-screen">
