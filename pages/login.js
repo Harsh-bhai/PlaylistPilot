@@ -1,30 +1,42 @@
-import { useSession } from "next-auth/react";
-import Link from "next/link";
-// SlSocialSpotify
+import React from "react";
+import { getProviders, signIn } from "next-auth/react";
+import { SlSocialSpotify } from "react-icons/sl";
+import { ToastContainer, toast } from "react-toastify";
 
-// import Shootingstar from '@/components/shootingstar'
+const Login = ({ providers }) => {
+  console.log(providers, "provider");
 
-export default function Home() {   
-     const { data : session,status}=useSession()
-     console.log(session)
 
-  
   return (
-    <div className="min-h-screen bg-gray-800 flex flex-col py-40 items-center space-y-4">
-      {/* <Shootingstar/> */}
-      <div className="flex  font-bold justify-center  text-4xl  z-20 text-white">
-        PlayList Pilot
-      </div>
-      <p className="text-2xl text-white">
-        Load up, filter out and organize your playlists.
-      </p>
-      <Link href={"/login"}>
-        <button className=" text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded-full text-lg translate-y-5 ">
-          LETS GO!
-        </button>{" "}
-      </Link>
-
-      <section className="">
+   <div className="">
+     <div className="flex flex-col my-28 items-center text-white space-y-10">
+      <h1 className="text-center text-4xl">Login</h1>
+      {Object.values(providers).map((provider) => {
+        return (
+          <button
+            key={provider.name}
+            onClick={() => {
+              signIn(provider.id, { callbackUrl: "/", redirect: false });
+              toast.success("Logged In ", {
+                position: "top-right",
+                autoClose: 1000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+              });
+            }}
+            className="flex mx-auto items-center text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded-full text-lg"
+          >
+            <SlSocialSpotify className="mr-2 text-3xl" /> Login with{" "}
+            {provider.name}
+          </button>
+        );
+      })}
+    </div>
+    <section className="">
       <div className="translate-x-10 translate-y-20 text-white m">
           <div className="w-screen flex overflow-hidden m-10 space-x-20">
                <div className="w-1/2 h-fit flex space-x-5 items-center">
@@ -130,6 +142,17 @@ export default function Home() {
 
      </div>
       </section>
-    </div>
+   </div>
   );
+};
+
+export default Login;
+export async function getServerSideProps() {
+  try {
+    const providers = await getProviders();
+    return { props: { providers } };
+  } catch (error) {
+    console.log("Error fetching providers:", error);
+    return { props: { providers: {} } };
+  }
 }

@@ -2,13 +2,35 @@
 // yarn add hamburger-react
 
 import React from 'react'
-import { useRef } from 'react';
+import { useRef ,useState} from 'react';
 import { MdAccountCircle } from 'react-icons/md';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { AiFillCloseCircle } from 'react-icons/ai';
 import Link from 'next/link';
 import Cookies from 'js-cookie';
-const Navbar = ({Logout}) => {
+import { signOut } from 'next-auth/react';
+import { ToastContainer, toast } from 'react-toastify';
+import { useSession } from 'next-auth/react';
+import { redirect } from 'next/dist/server/api-utils';
+const Navbar = () => {
+  const [reloadkey, setReloadkey] = useState(1)
+  const { data : session,status}=useSession()
+
+  const Logout= ( e ) => {
+    signOut({redirect:false})
+    setReloadkey(Math.random())
+      toast.success('Logged out ', {
+        position: "top-right",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        });
+  }
+
   const toggle = () => {
     if ((ref.current.classList.contains("-translate-x-full"))) {
       ref.current.classList.remove("-translate-x-full")
@@ -36,7 +58,7 @@ const Navbar = ({Logout}) => {
             <Link  href={"/about"}><div onClick={toggle} className='hover:text-yellow-600 text-white cursor-pointer'>About</div></Link>
             {/* <Link  href={"/services"}><div onClick={toggle} className='hover:text-yellow-600 text-white cursor-pointer'>Services</div></Link> */}
             <Link  href={"/about"}><div onClick={toggle} className='hover:text-yellow-600 text-white cursor-pointer'>Contact Us</div></Link>
-            <div onClick={Logout} className='hover:text-yellow-600 text-white cursor-pointer'>Logout</div>
+            {session?<div key={reloadkey} onClick={Logout} className='hover:text-yellow-600 text-white cursor-pointer'>Logout</div>:<Link  href={"/login"}><div onClick={toggle} className='hover:text-yellow-600 text-white cursor-pointer'>Login</div></Link>}
           </div>
         </div>
         {/* <button class=" text-white bg-yellow-500  mr-40  py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">Button</button> */}
