@@ -7,13 +7,13 @@ const refreshAccessToken = async (token) => {
     spotifyApi.setAccessToken(token.accessToken);
     spotifyApi.setRefreshToken(token.refreshToken);
 
-    const { body: refeshedToken } = spotifyApi.getAccessToken();
-    console.log("refreshed Token in ", refeshedToken);
+    const { body: refreshedToken } = spotifyApi.getAccessToken();
+    console.log("refreshed Token in ", refreshedToken);
     return {
       ...token,
-      accessToken: refeshedToken.acccess_token,
-      accessTokenExpires: Date.now() + refeshedToken.expires_in * 1000,
-      refreshToken: refeshedToken.refresh_token ?? token.refreshToken,
+      accessToken: refreshedToken.access_token,
+      accessTokenExpires: Date.now() + refreshedToken.expires_in * 1000,
+      refreshToken: refreshedToken.refresh_token ?? token.refreshToken,
     };
   } catch (error) {
     console.log(error);
@@ -44,7 +44,7 @@ export const authOptions = {
       if (account && user) {
         return {
           ...token,
-          accessToken: account.acccess_token,
+          accessToken: account.access_token,
           refreshToken: account.refresh_token,
           accessTokenExpires: account.expires_at * 1000, // we are handling expiring time in ms hence * 1000
         };
@@ -55,7 +55,7 @@ export const authOptions = {
         console.log("EXISTING ACCESS TOKEN IS VALID");
         return token;
       }
-      console.log("EXISTING ACCESS TOKEN IS VALID");
+      console.log("EXISTING ACCESS TOKEN IS NOT VALID");
       return await refreshAccessToken(token);
     },
     async session({ session, token }) {

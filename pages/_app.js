@@ -11,6 +11,7 @@ import { SessionProvider } from 'next-auth/react'
 
 
 
+
 export default function App({ Component, pageProps:{session,...pageProps} }) {
   const Router=useRouter()
   const [reloadkey, setReloadkey] = useState(1)

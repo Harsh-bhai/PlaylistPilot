@@ -8,7 +8,7 @@ const Login = ({ providers }) => {
 
 
   return (
-   <div className="">
+   <div className="text-white">
      <div className="flex flex-col my-28 items-center text-white space-y-10">
       <h1 className="text-center text-4xl">Login</h1>
       {Object.values(providers).map((provider) => {
@@ -16,7 +16,7 @@ const Login = ({ providers }) => {
           <button
             key={provider.name}
             onClick={() => {
-              signIn(provider.id, { callbackUrl: "/", redirect: false });
+              signIn(provider.id, { callbackUrl: "/",  });
               toast.success("Logged In ", {
                 position: "top-right",
                 autoClose: 1000,
@@ -28,7 +28,7 @@ const Login = ({ providers }) => {
                 theme: "dark",
               });
             }}
-            className="flex mx-auto items-center text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded-full text-lg"
+            className="flex mx-auto items-center text-gray-300 bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded-full text-lg"
           >
             <SlSocialSpotify className="mr-2 text-3xl" /> Login with{" "}
             {provider.name}
@@ -37,7 +37,7 @@ const Login = ({ providers }) => {
       })}
     </div>
     <section className="">
-      <div className="translate-x-10 translate-y-20 text-white m">
+      <div className="translate-x-10 translate-y-20  m">
           <div className="w-screen flex overflow-hidden m-10 space-x-20">
                <div className="w-1/2 h-fit flex space-x-5 items-center">
                     <div className="w-1/2 h-full">

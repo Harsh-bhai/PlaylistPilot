@@ -11,7 +11,6 @@ import Cookies from 'js-cookie';
 import { signOut } from 'next-auth/react';
 import { ToastContainer, toast } from 'react-toastify';
 import { useSession } from 'next-auth/react';
-import { redirect } from 'next/dist/server/api-utils';
 const Navbar = () => {
   const [reloadkey, setReloadkey] = useState(1)
   const { data : session,status}=useSession()
@@ -51,19 +50,19 @@ const Navbar = () => {
           <img src="logo.svg" alt="" />
           {/* <span className="ml-3 text-xl text-white">PlayListPilot</span> */}
         </div></Link>
-        <div ref={ref} className="navitems flex flex-col md:flex-row md:items-center md:bg-inherit bg-yellow-400 px-10 py-4 md:py-0 absolute top-0 left-0 transform transition-transform -translate-x-full h-full md:h-auto md:w-full w-2/3 md:static md:translate-x-0  md:transition-none ease-in-out" >
+        <div ref={ref} className="navitems flex flex-col md:flex-row md:items-center md:bg-inherit bg-slate-800 px-10 py-4 md:py-0 absolute top-0 left-0 transform transition-transform -translate-x-full h-full md:h-auto md:w-full w-2/3 md:static md:translate-x-0  md:transition-none ease-in-out" >
           <span className='absolute top-8 left-8
           'onClick={toggle} ><AiFillCloseCircle className='text-4xl font-extralight md:hidden' /></span>
           <div className="flex flex-col md:flex-row md:items-center md:space-x-8  mainitems my-24 md:my-4 space-y-6 md:space-y-0">
-            <Link  href={"/about"}><div onClick={toggle} className='hover:text-yellow-600 text-white cursor-pointer'>About</div></Link>
-            {/* <Link  href={"/services"}><div onClick={toggle} className='hover:text-yellow-600 text-white cursor-pointer'>Services</div></Link> */}
-            <Link  href={"/about"}><div onClick={toggle} className='hover:text-yellow-600 text-white cursor-pointer'>Contact Us</div></Link>
-            {session?<div key={reloadkey} onClick={Logout} className='hover:text-yellow-600 text-white cursor-pointer'>Logout</div>:<Link  href={"/login"}><div onClick={toggle} className='hover:text-yellow-600 text-white cursor-pointer'>Login</div></Link>}
+            <Link  href={"/about"}><div onClick={toggle} className='hover:text-violet-700 text-white cursor-pointer'>About</div></Link>
+            {/* <Link  href={"/services"}><div onClick={toggle} className='hover:text-violet-700 text-white cursor-pointer'>Services</div></Link> */}
+            <Link  href={"/options"}><div onClick={toggle} className='hover:text-violet-700 text-white cursor-pointer'>Options</div></Link>
+            {session?<div key={reloadkey} onClick={Logout} className='hover:text-violet-700 text-white cursor-pointer'>Logout</div>:<Link  href={"/login"}><div onClick={toggle} className='hover:text-violet-700 text-white cursor-pointer'>Login</div></Link>}
           </div>
         </div>
-        {/* <button class=" text-white bg-yellow-500  mr-40  py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">Button</button> */}
+        {/* <button class=" text-white bg-violet-500  mr-40  py-2 px-6 focus:outline-none hover:bg-indigo-700 rounded text-lg">Button</button> */}
         <Link href={'/profile'}><div className=" account absolute top-1  md:top-[-5px] right-0 text-4xl p-6 cursor-pointer ">
-          {Cookies.get('token')?<MdAccountCircle className='text-gray-400' />:<MdAccountCircle className='text-gray-400 hidden' />}
+          {session?<MdAccountCircle className='text-gray-400' />:<MdAccountCircle className='text-gray-400 hidden' />}
         </div></Link>
       </div>
     </div>
