@@ -56,7 +56,7 @@ export async function getServerSideProps(context) {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer BQCe_ml7bPZme7AyXs4a-ubG5GNBLRFOp7A1Uk1MqpWGUMEfek7Ey5QXdoLUCz-pI62lbNV8motD_6qNGbp9CouMaYTXKzJFJTeLpw8psNn0GXjHv_xYZZXhYU0EXPMAAYpP1BIXe6SLWPuf6-AVqlJEPAHHT1yo_RQKupVVQcA_6CYoVSRFdx6XWC-Xjepk5G7GGBIfOgWLg86hE6HDr5pH_PRC6YlLtVOCVp1sw3AcVkRUJcRO9W1UJidKsxTpHrqGC0SAm-RECKg9ovPCaaCARJQFuCkrcij5G_valHo8a7M5GxhzW_Se3E6XMp-idNHCM84h3Dr7Y9D_daE`,
+      Authorization: `Bearer BQBtHaCnBsoRgDrh1o82cwQL3QthVfBD0iyGIkHZsxNjgHCEQ4tsfBTICiJ3bPoUEWYMGJexBuyFXtwvC9ggKckD2AL4ss9v1jgRn2DIhPxcx_ZyDeI9rnhnLRua57nJFEFME6tnY6JHaIiLyZdzs7XuPHrZ8ysRvfUbhzdpGwtQvgEGjZ6H3FJVmmWi-SrfNmkpR486paOTfkb5L_A09Q04AHmezpP0lOip6PYAyC-RObAecc-M0J9SnS_9laUy1OnPfIY1Vas-ViHyZ-tfEftyFwiwOSyBnjLXSFqpNah66e5ajaIoeQgp7QYnZAsVuJh-sgAgnMXR4d15pu8`,
     },
   });
   let user = await a.json();
