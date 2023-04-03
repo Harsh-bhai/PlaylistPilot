@@ -3282,7 +3282,7 @@ typed-array-length@^1.0.4:
 
 typed.js@^2.0.132:
   version "2.0.132"
-  resolved "https://registry.yarnpkg.com/typed.js/-/typed.js-2.0.132.tgz#a860cf1772aafad36486db9d25d255ab9ec9d7ad"
+  resolved "https://registry.npmjs.org/typed.js/-/typed.js-2.0.132.tgz"
   integrity sha512-6lWs7dqLtfvZZtNLUJte5RYkT0rj2ACOwkeWghxSnyChSu/ZHX2NlT1KHc2daqVx3073wLIJYlCL2aHcjWYCAQ==
 
 typedarray-pool@^1.2.0:
