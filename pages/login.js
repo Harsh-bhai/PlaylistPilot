@@ -16,7 +16,7 @@ const Login = ({ providers }) => {
           <button
             key={provider.name}
             onClick={() => {
-              signIn(provider.id, { callbackUrl: "/",  });
+              signIn(provider.id, { callbackUrl: "/options",  });
           //     toast.success("Logged In ", {
           //       position: "top-right",
           //       autoClose: 1000,

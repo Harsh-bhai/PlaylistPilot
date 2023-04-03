@@ -8,6 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useRouter } from 'next/router'
 import NextNProgress from 'nextjs-progressbar';
 import { SessionProvider } from 'next-auth/react'
+import SongPlayer from '@/components/songplayer'
 
 
 
@@ -57,6 +58,7 @@ theme="dark"
       />
      
   <Component {...pageProps} key={reloadkey}  reloadkey={reloadkey} />
+  <SongPlayer/>
   <Footer/>
  </SessionProvider>
   </>

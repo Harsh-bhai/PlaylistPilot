@@ -3,7 +3,8 @@ import Usespotify from "@/hooks/usespotify";
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 
-const PlaylistTracks = () => {
+const PlaylistTracks = ({song}) => {
+  console.log(song,"song")
   const spotifyApi = Usespotify();
   const { data: session, status } = useSession();
   const [playlistTracks, setPlaylistTracks] = useState([]);
@@ -26,7 +27,7 @@ const PlaylistTracks = () => {
         <h1 className="text-4xl font-bold mb-10">Playlist Tracks</h1>
         <div className="grid grid-cols-5 gap-4">
   {playlistTracks.map((track) => (
-    <div key={track.track.id} className="rounded-lg overflow-hidden">
+    <div key={track.track.id} onClick={()=>{router.push(`/playlist/player/${track.track.id}`)}} className="rounded-lg overflow-hidden">
       <img src={track.track.album.images[0]?.url} alt={track.track.album.name} className="h-40 w-full object-cover" />
       <div className="px-4 py-2">
         <h3 className="text-lg font-medium">{track.track.name}</h3>
@@ -42,3 +43,4 @@ const PlaylistTracks = () => {
 };
 
 export default PlaylistTracks;
+

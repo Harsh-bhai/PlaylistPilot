@@ -1,9 +1,8 @@
 import React from "react";
-import Cookies from "js-cookie";
 import { signOut, useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import Usespotify from "@/hooks/usespotify";
-
+import Link from "next/link";
 const Options = () => {
   const spotifyApi = Usespotify();
   const { data: session, status } = useSession();
@@ -28,76 +27,44 @@ const Options = () => {
         <div className="container px-5 py-24 mx-auto">
           <div className="flex flex-wrap -m-4">
             <div className="lg:w-1/4 md:w-1/2 p-4 w-full">
-              <a className="block relative h-48 rounded overflow-hidden">
-                <img
-                  alt="ecommerce"
-                  className="object-cover object-center w-full h-full block"
-                  src="https://dummyimage.com/420x260"
-                />
-              </a>
+              <Link href={`/getplaylist`} className="flex justify-center items-center text-white border-2 border-white rounded-lg relative h-48  overflow-hidden">
+               Get playlist here
+              </Link>
             </div>
             <div className="lg:w-1/4 md:w-1/2 p-4 w-full">
-              <a className="block relative h-48 rounded overflow-hidden">
-                <img
-                  alt="ecommerce"
-                  className="object-cover object-center w-full h-full block"
-                  src="https://dummyimage.com/421x261"
-                />
-              </a>
+              <Link href={`/createplaylist`} className="flex justify-center items-center text-white border-2 border-white rounded-lg relative h-48  overflow-hidden">
+               Create Playlist
+              </Link>
             </div>
             <div className="lg:w-1/4 md:w-1/2 p-4 w-full">
-              <a className="block relative h-48 rounded overflow-hidden">
-                <img
-                  alt="ecommerce"
-                  className="object-cover object-center w-full h-full block"
-                  src="https://dummyimage.com/422x262"
-                />
-              </a>
+              <Link href={`/getplaylist`} className="flex justify-center items-center text-white border-2 border-white rounded-lg relative h-48  overflow-hidden">
+               Get playlist here
+              </Link>
             </div>
             <div className="lg:w-1/4 md:w-1/2 p-4 w-full">
-              <a className="block relative h-48 rounded overflow-hidden">
-                <img
-                  alt="ecommerce"
-                  className="object-cover object-center w-full h-full block"
-                  src="https://dummyimage.com/423x263"
-                />
-              </a>
+              <Link href={`/getplaylist`} className="flex justify-center items-center text-white border-2 border-white rounded-lg relative h-48  overflow-hidden">
+               Get playlist here
+              </Link>
             </div>
             <div className="lg:w-1/4 md:w-1/2 p-4 w-full">
-              <a className="block relative h-48 rounded overflow-hidden">
-                <img
-                  alt="ecommerce"
-                  className="object-cover object-center w-full h-full block"
-                  src="https://dummyimage.com/424x264"
-                />
-              </a>
+              <Link href={`/getplaylist`} className="flex justify-center items-center text-white border-2 border-white rounded-lg relative h-48  overflow-hidden">
+               Get playlist here
+              </Link>
             </div>
             <div className="lg:w-1/4 md:w-1/2 p-4 w-full">
-              <a className="block relative h-48 rounded overflow-hidden">
-                <img
-                  alt="ecommerce"
-                  className="object-cover object-center w-full h-full block"
-                  src="https://dummyimage.com/425x265"
-                />
-              </a>
+              <Link href={`/getplaylist`} className="flex justify-center items-center text-white border-2 border-white rounded-lg relative h-48  overflow-hidden">
+               Get playlist here
+              </Link>
             </div>
             <div className="lg:w-1/4 md:w-1/2 p-4 w-full">
-              <a className="block relative h-48 rounded overflow-hidden">
-                <img
-                  alt="ecommerce"
-                  className="object-cover object-center w-full h-full block"
-                  src="https://dummyimage.com/427x267"
-                />
-              </a>
+              <Link href={`/getplaylist`} className="flex justify-center items-center text-white border-2 border-white rounded-lg relative h-48  overflow-hidden">
+               Get playlist here
+              </Link>
             </div>
             <div className="lg:w-1/4 md:w-1/2 p-4 w-full">
-              <a className="block relative h-48 rounded overflow-hidden">
-                <img
-                  alt="ecommerce"
-                  className="object-cover object-center w-full h-full block"
-                  src="https://dummyimage.com/428x268"
-                />
-              </a>
+              <Link href={`/getplaylist`} className="flex justify-center items-center text-white border-2 border-white rounded-lg relative h-48  overflow-hidden">
+               Get playlist here
+              </Link>
             </div>
           </div>
         </div>
