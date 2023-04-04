@@ -31,7 +31,6 @@ const UserSchema = new mongoose.Schema(
     product: { type: String },
     type: { type: String, default: null },
     uri: { type: String, default: null },
-    beta: {type : JSON ,default:null}
   },
   { timestamps: true }
 );
