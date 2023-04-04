@@ -2,7 +2,7 @@ import React from 'react'
 
 const Beta = () => {
   return (
-    <div>Beta</div>
+    <div>Beta .js</div>
   )
 }
 
