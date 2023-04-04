@@ -7,6 +7,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useRouter } from 'next/router'
 import NextNProgress from 'nextjs-progressbar';
+import { SessionProvider } from 'next-auth/react'
 
 
 
@@ -32,28 +33,30 @@ export default function App({ Component, pageProps }) {
 
 
   return <>
-    <Navbar Logout={Logout} />
-    <ToastContainer
-      position="top-right"
-      autoClose={1000}
-      hideProgressBar={false}
-      newestOnTop={false}
-      closeOnClick
-      rtl={false}
-      pauseOnFocusLoss
-      draggable
-      pauseOnHover
-      theme="dark"
-    />
-    <NextNProgress
-      color="#4f46e5"
-      startPosition={0.5}
-      stopDelayMs={300}
-      height={3}
-      showOnShallow={true}
-    />
-
-    <Component {...pageProps} key={reloadkey} Logout={Logout} reloadkey={reloadkey} />
-    <Footer />
+ <SessionProvider session={session}>
+ <Navbar />
+  <ToastContainer
+position="top-right"
+autoClose={1000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+theme="dark"
+/>
+  <NextNProgress
+        color="#4f46e5"
+        startPosition={0.5}
+        stopDelayMs={300}
+        height={3}
+        showOnShallow={true}
+      />
+     
+  <Component {...pageProps} key={reloadkey}  reloadkey={reloadkey} />
+  <Footer/>
+ </SessionProvider>
   </>
 }
