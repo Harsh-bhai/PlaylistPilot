@@ -7,11 +7,14 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useRouter } from 'next/router'
 import NextNProgress from 'nextjs-progressbar';
-import { SessionProvider } from 'next-auth/react'
+import { SessionProvider } from 'next-auth/react' 
+import { useSession } from 'next-auth/react';
+
 
 
 
 export default function App({ Component, pageProps }) {
+  const { data: session, status } = useSession();
   const Router = useRouter()
   const [reloadkey, setReloadkey] = useState(1)
   const Logout = () => {
