@@ -56,7 +56,7 @@ export async function getServerSideProps(context) {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer BQBtHaCnBsoRgDrh1o82cwQL3QthVfBD0iyGIkHZsxNjgHCEQ4tsfBTICiJ3bPoUEWYMGJexBuyFXtwvC9ggKckD2AL4ss9v1jgRn2DIhPxcx_ZyDeI9rnhnLRua57nJFEFME6tnY6JHaIiLyZdzs7XuPHrZ8ysRvfUbhzdpGwtQvgEGjZ6H3FJVmmWi-SrfNmkpR486paOTfkb5L_A09Q04AHmezpP0lOip6PYAyC-RObAecc-M0J9SnS_9laUy1OnPfIY1Vas-ViHyZ-tfEftyFwiwOSyBnjLXSFqpNah66e5ajaIoeQgp7QYnZAsVuJh-sgAgnMXR4d15pu8`,
+      Authorization: `Bearer ${context.req.cookies["token"]}`,
     },
   });
   let user = await a.json();

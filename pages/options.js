@@ -5,24 +5,9 @@ import { useEffect, useState } from "react";
 import Usespotify from "@/hooks/usespotify";
 
 const Options = () => {
-  const spotifyApi = Usespotify();
-  const { data: session, status } = useSession();
-  const [playlists, setPlaylists] = useState([]);
-
-  useEffect(() => {
-    if ( spotifyApi.getAccessToken()){
-      spotifyApi.getUserPlaylists().then((data)=>{
-        setPlaylists(data.body.items)
-      })
-    }
-  
-  }, [session,spotifyApi])
-  console.log(playlists,"plalist")
-  
-
   return (
-    <div className="min-h-screen text-white flex flex-col space-y-4 items-center">
-      <h1 className="text-5xl font-bold">Options</h1>
+    <div className='min-h-screen text-white flex flex-col space-y-4 items-center'>
+      <h1 className='text-5xl font-bold'>Options</h1>
       <h2>Create, Modify your Playlist here ...</h2>
       <section className="text-gray-600 body-font">
         <div className="container px-5 py-24 mx-auto">
@@ -106,23 +91,20 @@ const Options = () => {
   );
 };
 
-export default Options;
 
 export async function getServerSideProps(context) {
-  const token = context.req.cookies["token"];
+  const token = context.req.cookies['token']    
   // console.log(token)
+ 
+  let res=await fetch("https://api.spotify.com/v1/search?query=Atif Aslam&type=artist",{
+    headers:{Authorization:`Bearer ${token}`},
+    // params:{q:}
+  })
 
-  let res = await fetch(
-    "https://api.spotify.com/v1/search?query=Atif Aslam&type=artist",
-    {
-      headers: { Authorization: `Bearer ${token}` },
-      // params:{q:}
-    }
-  );
-
-  let data = await res.json();
-  console.log(data);
+  let data = await res.json()
+  console.log(data)
   return {
-    props: { data },
-  };
+    props: {data},
+  }
+ 
 }
