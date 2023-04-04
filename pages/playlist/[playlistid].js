@@ -29,7 +29,7 @@ const PlaylistTracks = () => {
     <div key={track.track.id} className="rounded-lg overflow-hidden">
       <img src={track.track.album.images[0]?.url} alt={track.track.album.name} className="h-40 w-full object-cover" />
       <div className="px-4 py-2">
-        <h3 className="text-lg font-medium">{track.track.name}</h3>
+        <h3 className="text-lg font-medium">{track.track.name}jaksfjkld</h3>
         <p className="text-gray-400">{track.track.artists.map((artist) => artist.name).join(", ")}</p>
       </div>
     </div>
