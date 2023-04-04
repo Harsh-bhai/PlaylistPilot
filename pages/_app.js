@@ -7,8 +7,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useRouter } from 'next/router'
 import NextNProgress from 'nextjs-progressbar';
-import { SessionProvider } from 'next-auth/react' 
-import { useSession } from 'next-auth/react';
+import { SessionProvider } from 'next-auth/react'
 
 
 
