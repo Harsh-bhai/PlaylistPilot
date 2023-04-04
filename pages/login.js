@@ -10,7 +10,7 @@ const Login = ({ providers }) => {
   return (
    <div className="text-white">
      <div className="flex flex-col my-28 items-center text-white space-y-10">
-      <h1 className="text-center text-4xl">Login</h1>
+      <h1 className="text-center text-4xl">Logins</h1>
       {Object.values(providers).map((provider) => {
         return (
           <button
