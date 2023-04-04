@@ -16,7 +16,7 @@ export default function Home() {
         PlayList Pilot
       </div>
       <p className="text-2xl text-white">
-        Load up, filter out and organize your playlists.
+        Load up, filter out and organize your playlists. and Give me money
       </p>
       <Link href={"/login"}>
         <button className=" text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded-full text-lg translate-y-5 ">
