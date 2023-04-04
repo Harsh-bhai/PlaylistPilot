@@ -26,7 +26,7 @@ const Login = ({ providers }) => {
           //       draggable: true,
           //       progress: undefined,
           //       theme: "dark",
-          //     });
+          //     });sdfsdf
             }}
             className="flex mx-auto items-center text-gray-300 bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded-full text-lg"
           >
