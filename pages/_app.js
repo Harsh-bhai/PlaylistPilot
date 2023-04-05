@@ -58,7 +58,7 @@ theme="dark"
       />
      
   <Component {...pageProps} key={reloadkey}  reloadkey={reloadkey} />
-  <SongPlayer/>
+  {/* <SongPlayer/> */}
   <Footer/>
  </SessionProvider>
   </>
