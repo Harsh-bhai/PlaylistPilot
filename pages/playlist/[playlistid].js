@@ -183,7 +183,7 @@ const PlaylistTracks = ({ song }) => {
                       console.log(item, "item");
                       if (item[0] == track.track.id) {
                         return (
-                          <span key={reloadkey} className=" px-4 text-center pb-1 rounded-full  mx-2 bg-gray-400">{`${item[1]}`}</span>
+                          <span key={item[0]} className=" px-4 text-center pb-1 rounded-full  mx-2 bg-gray-400">{`${item[1]}`}</span>
                         );
                       }
                     })}
