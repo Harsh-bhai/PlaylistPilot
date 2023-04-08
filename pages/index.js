@@ -8,7 +8,9 @@ export default function Home() {
      const { data : session,status}=useSession()
      console.log(session)
 
+
   
+
   return (
     <div className="min-h-screen bg-gray-800 flex flex-col py-40 items-center space-y-4">
       {/* <Shootingstar/> */}

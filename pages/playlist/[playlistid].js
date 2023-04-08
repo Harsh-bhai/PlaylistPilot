@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import mongoose from "mongoose";
 import Spotifyuser from "@/model/Spotifyuser";
 import Cookies from "js-cookie";
+import Link from "next/link";
 
 const PlaylistTracks = ({ user }) => {
   console.log("users", user);
@@ -21,6 +22,7 @@ const PlaylistTracks = ({ user }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [fetchyes, setFetchyes] = useState(false);
   const [shouldRunEffect, setShouldRunEffect] = useState(true);
+  const [ifuser, setIfuser] = useState(false)
 
   const [reloadkey, setReloadkey] = useState(1);
   // const [accesstoken, setAccesstoken] = useState('')
@@ -42,14 +44,19 @@ const PlaylistTracks = ({ user }) => {
       console.log("before");
       console.log("after");
     }
+    if(user[0]){
+      setIfuser(true)
+    }
     // retriveData()
   }, [session]);
 
   useEffect(() => {
+    console.log("2nduseffect")
     storeDetails();
-    if(user[0].tags[playlistid]){
+    if(user[0] && user[0].tags && user[0].tags[playlistid]){
       setIsThereTag(true)
     }
+    
   }, []);
 
   function removeArraysWithValue(arr, value) {
@@ -60,7 +67,6 @@ const PlaylistTracks = ({ user }) => {
   const remove= async( trackId ) => {
     
     console.log("tracid",trackId)
-    if(isThereTag){
       user[0].tags[playlistid]= removeArraysWithValue(user[0].tags[playlistid],trackId)
       
       let done = await fetch(
@@ -70,13 +76,12 @@ const PlaylistTracks = ({ user }) => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify([user]),
+          body: JSON.stringify([user[0]]),
         }
       );
       console.log(user[0],"tu mere")
       
       setIsThereTag(false)
-    }
   }
 
   // const handleModalToggle = () => {
@@ -129,31 +134,29 @@ const PlaylistTracks = ({ user }) => {
   // };
 
   const storeDetails = async () => {
-    console.log("storedetails is running");
+    let data = user[0]
+    
+    console.log("storedetails is running",data);
     if (spotifyApi?.getAccessToken()) {
       console.log(spotifyApi?.getAccessToken(), "apitoken");
       try {
         // console.log("trying");
-        let a = await spotifyApi.getMe();
+        // let a = await spotifyApi.getMe();
         // console.log("a", a.body);
         let b = await spotifyApi.getPlaylist(playlistid);
         // console.log("b", b.body);
-        let c = await spotifyApi.getClientId();
-        let data = {
-          userinfo: a.body,
-          playlists: { [playlistid]: b.body },
-          id: c,
-        };
+        // let c = await spotifyApi.getClientId();
+          data.playlists= { [playlistid]: b.body };
         // console.log("Data:", data);
 
         let store = await fetch(
-          `${process.env.NEXT_PUBLIC_BASEURL}/api/getspotifyuser`,
+          `${process.env.NEXT_PUBLIC_BASEURL}/api/updatespotifyuser`,
           {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
             },
-            body: JSON.stringify(data),
+            body: JSON.stringify([data]),
           }
         );
         let sote = await store.json();
@@ -196,15 +199,22 @@ const PlaylistTracks = ({ user }) => {
     return false;
   }
 
+  const reloader =()=>{
+    let timeoutId = setTimeout(() => {
+      setReloadkey(Math.random());
+      clearTimeout(timeoutId);
+    }, 100);
+  }
+
   console.log(atoken);
   const handleSubmit = async (track, tags) => {
     const trackId = track.track.id;
-    const url = `${process.env.NEXT_PUBLIC_BASEURL}/api/getspotifyuser`;
+    // const url = `${process.env.NEXT_PUBLIC_BASEURL}/api/getspotifyuser`;
 
     // Set up authorization headers with your Spotify API access token
-    let data = user[0];
+    let data =  user[0];
     let tagarray = [];
-    if (data.tags) {
+    if (data && data?.tags) {
       let json = data.tags;
 
       if (playlistid in json) {
@@ -214,12 +224,16 @@ const PlaylistTracks = ({ user }) => {
       tagarray = filterUnique(tagarray);
       data.tags[playlistid] = tagarray;
       console.log([data], "ifwale", "tagarray=", tagarray, "json=", json);
-    } else {
+    }
+     else {
       tagarray = [[trackId, tags]];
       tagarray = filterUnique(tagarray);
-      data.tags = { [playlistid]: tagarray };
+      console.log(data,"beforeelse")
+      if (data){
+        data.tags = { [playlistid]: tagarray };
+      }
       console.log(
-        typeof JSON.parse(JSON.stringify(data)),
+        data,
         "elsewale",
         "tagarray=",
         tagarray
@@ -338,18 +352,19 @@ const PlaylistTracks = ({ user }) => {
                       .map((artist) => artist.name)
                       .join(", ")}
                   </p>
-                  {isThereTag && user[0]?.tags[playlistid].map((item) => {
+                  {user[0].tags && user[0].tags[playlistid] && user[0]?.tags[playlistid].map((item) => {
                     console.log(item, "item");
+                    
                     if (item[0] == track.track.id) {
                       return (
-                        <span
-                          key={reloadkey}
-                          className="px-4 text-center pb-1 rounded-full mx-2 bg-gray-400"
-                        >
-                          {`${item[1]}`}
-                        </span>
+                        <Link href={`/tags/${item[1]}`}><span
+                        key={reloadkey}
+                        className="px-4 text-center pb-1 rounded-full mx-2 bg-gray-400"
+                      >
+                        {`${item[1]}`}
+                      </span></Link>
                       );
-                    } else {
+                    }else{
                       return null;
                     }
                   })}
@@ -363,7 +378,7 @@ const PlaylistTracks = ({ user }) => {
                      px-4  focus:outline-none hover:bg-indigo-600 rounded sm:mt-0"
                     onClick={(e) => {
                       remove(track.track.id);
-                      setReloadkey(Math.random());
+                      reloader();
                     }}
                   >
                     remove
@@ -383,7 +398,7 @@ const PlaylistTracks = ({ user }) => {
                      px-4  focus:outline-none hover:bg-indigo-600 rounded sm:mt-0"
                     onClick={(e) => {
                       handleSubmit(track, e.target.previousSibling.value);
-                      setReloadkey(Math.random());
+                      reloader();
                     }}
                   >
                     Add

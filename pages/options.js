@@ -3,6 +3,7 @@ import { signOut, useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import Usespotify from "@/hooks/usespotify";
 import Link from "next/link";
+import Cookies from "js-cookie";
 const Options = () => {
   const spotifyApi = Usespotify();
   const { data: session, status } = useSession();
@@ -12,11 +13,52 @@ const Options = () => {
     if ( spotifyApi.getAccessToken()){
       spotifyApi.getUserPlaylists().then((data)=>{
         setPlaylists(data.body.items)
+        Cookies.set("spotifyid",spotifyApi.getClientId())
+
       })
     }
   
   }, [session,spotifyApi])
+  useEffect(() => {
+    storeDetails();
+  }, [])
+  
   console.log(playlists,"plalist")
+  const storeDetails = async () => {
+    console.log("storedetails is running");
+    if (spotifyApi?.getAccessToken()) {
+      console.log(spotifyApi?.getAccessToken(), "apitoken");
+      try {
+        // console.log("trying");
+        let a = await spotifyApi.getMe();
+        // console.log("a", a.body);
+        // let b = await spotifyApi.getPlaylist(playlistid);
+        // console.log("b", b.body);
+        let c = await spotifyApi.getClientId();
+        let data = {
+          userinfo: a.body,
+          // playlists: { [playlistid]: b.body },
+          id: c,
+        };
+        // console.log("Data:", data);
+
+        let store = await fetch(
+          `${process.env.NEXT_PUBLIC_BASEURL}/api/getspotifyuser`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+          }
+        );
+        let sote = await store.json();
+        console.log(sote, "sote", data);
+      } catch (error) {
+        console.log("Error:", error);
+      }
+    }
+  };
   
 
   return (

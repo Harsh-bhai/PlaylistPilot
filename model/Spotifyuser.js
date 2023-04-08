@@ -37,7 +37,7 @@ const Spotifyuserschema = new mongoose.Schema(
     playlists:{type:JSON,defualt:null},
 
     tags:{type:JSON,default:null},
-    id:{type:String,default:null}
+    id:{type:String,default:null,unique:true}
     
   },
   { timestamps: true }
