@@ -9,6 +9,7 @@ import { useRouter } from 'next/router'
 import NextNProgress from 'nextjs-progressbar';
 import { SessionProvider } from 'next-auth/react'
 import SongPlayer from '@/components/songplayer'
+import shootingstar from '@/components/shootingstar'
 
 
 
@@ -58,6 +59,7 @@ theme="dark"
       />
      
   <Component {...pageProps} key={reloadkey}  reloadkey={reloadkey} />
+  {/* <shootingstar/> */}
   {/* <SongPlayer/> */}
   <Footer/>
  </SessionProvider>

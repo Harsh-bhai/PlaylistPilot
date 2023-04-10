@@ -357,7 +357,7 @@ const PlaylistTracks = ({ user }) => {
                     
                     if (item[0] == track.track.id) {
                       return (
-                        <Link href={`/tags/${item[1]}`}><span
+                        <Link href={`/tags/${playlistid}$${item[1].toLowerCase()}`}><span 
                         key={reloadkey}
                         className="px-4 text-center pb-1 rounded-full mx-2 bg-gray-400"
                       >

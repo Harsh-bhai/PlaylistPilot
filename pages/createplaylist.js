@@ -73,7 +73,10 @@ const Createplaylist = () => {
         </div>
         <button className="text-white  bg-indigo-700 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-800 rounded-full text-lg">Create Playlist</button>
       </form>
-    </div></div>
+    </div>
+
+    
+    </div>
     )
 }
 
