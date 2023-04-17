@@ -77,7 +77,7 @@ const Options = () => {
               <FaMusic className="text-5xl"/> <span className="text-xl font-semibold">Add Tags to Songs</span>
               </Link>
             </div>
-            <div className=" w-1/4 hover:scale-110 transition-transform hover:delay-75">
+            {/* <div className=" w-1/4 hover:scale-110 transition-transform hover:delay-75">
             <Link href={`/createplaylist`} className="flex space-y-4 flex-col justify-center items-center text-white border-2 border-white rounded-lg relative h-48  overflow-hidden">
               <AiFillFolderAdd className="text-5xl"/> <span className="text-xl font-semibold">Create Playlist</span>
               </Link>
@@ -86,7 +86,7 @@ const Options = () => {
             <Link href={`/betafeatures`} className="flex space-y-4 flex-col justify-center items-center text-white border-2 border-white rounded-lg relative h-48  overflow-hidden">
               <SiYoutubemusic className="text-5xl"/> <span className="text-xl font-semibold">Add other song links</span>
               </Link>
-            </div>
+            </div> */}
           
           </div>
         </div>
