@@ -9,7 +9,7 @@ import { useRouter } from 'next/router'
 import NextNProgress from 'nextjs-progressbar';
 import { SessionProvider } from 'next-auth/react'
 import SongPlayer from '@/components/songplayer'
-import shootingstar from '@/components/shootingstar'
+import Shootingstar from '@/components/shootingstar'
 
 
 
@@ -37,7 +37,8 @@ export default function App({ Component, pageProps:{session,...pageProps} }) {
 
   return <>
  <SessionProvider session={session}>
- <Navbar />
+ <Navbar  />
+ <Shootingstar/>
   <ToastContainer
 position="top-right"
 autoClose={1000}

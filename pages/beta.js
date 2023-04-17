@@ -1,8 +1,27 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import Usespotify from "@/hooks/usespotify";
 import { useSession } from "next-auth/react";
+import { ToastContainer, toast } from 'react-toastify';
+import User from '@/model/User';
+import mongoose from 'mongoose';
 
-const Beta = () => {
+
+const Beta = ({users}) => {
+  // const [beta, setBeta] = useState()
+  console.log("USers",users)
+  const prev=users.users
+  console.log("bega",prev)
+  // console.log("here",...users.users[0])
+  const [userinfo, setUserinfo] = useState()
+  useEffect(() => {
+    
+    if (spotifyapi.getAccessToken()){
+      
+
+     
+    }
+  }, [])
+  
 const spotifyapi=Usespotify()
 const [form, setform] = useState({
   name:'',
@@ -19,22 +38,43 @@ const [form, setform] = useState({
   };
 
   const handlesubmit = async (e) => {
+    
     e.preventDefault();
     const data={
-      ...(await spotifyapi.getMe()).body,
-      beta:{name:form.name,
+      userinfo:users.users.userinfo,
+      beta:{[form.name]:{
         url:form.url,
         imgurl:form.imgurl,
         tags:form.tags.split(',').map(e=>e.trim()),
-        artistname:form.artistname.split(',').map(e=>e.trim()),}
+        artistname:form.artistname.split(',').map(e=>e.trim()),}}
     
     
     }
+    setform({
+      name:'',
+      url:'',
+      imgurl:'',
+      tags:[],
+      artistname:[],
+    
+    
+    })
+    toast.success('Track Added ', {
+      position: "top-right",
+      autoClose: 1500,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+      });
+    
     
    
     console.log(form,"form")
     console.log(data,"data")
-    let a=await fetch('http://localhost:3000/api/updateusers',{
+    let a=await fetch('http://localhost:3000/api/updatebetausers',{
       method:"POST",
       headers:{
         "Content-Type":"application/json"
@@ -50,8 +90,29 @@ const [form, setform] = useState({
   return (
     <div>
       <section className="text-gray-100 body-font relative">
+      <ToastContainer
+position="top-right"
+autoClose={1500}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+theme="dark"
+/>
   <div className="container px-5 py-24 mx-auto flex sm:flex-nowrap flex-wrap">
-    <div className="lg:w-2/3 md:w-1/2 bg-gray-700 rounded-lg overflow-hidden sm:mr-10 p-10 flex items-end justify-start relative">
+    <div className="lg:w-2/3 md:w-1/2 bg-gray-800 rounded-lg overflow-hidden sm:mr-10 p-10 flex flex-col items-center justify-start relative">
+      <img src="/logo.svg" alt="" className='h-40 my-10'/>
+      <p className='text-5xl font-semibold'>Add Songs</p>
+      {/* <div className="songdetails flex flex-col space-y-10">
+      <p>Song Name : {form.name}</p>
+      
+      <p>Artist Name : {form.artistname>0 && form.artistname.map((item)=>{''.join(item)})}</p>
+      <p>Tags Name : {form.name}</p>
+      <p>Song Name : {form.name}</p>
+      </div> */}
       {/* <iframe width="100%" height="100%" className="absolute inset-0" frameborder="0" title="map" marginheight="0" marginwidth="0" scrolling="no" src="https://maps.google.com/maps?width=100%&height=100&hl=en&q=%C4%B0zmir+(My%20Business%20Name)&ie=UTF8&t=&z=14&iwloc=B&output=embed" style="filter: grayscale(1) contrast(1.2) opacity(0.4);"></iframe> */}
       
     </div>
@@ -88,3 +149,16 @@ const [form, setform] = useState({
 }
 
 export default Beta
+
+export async function getServerSideProps(context) {
+  if (!mongoose.connections[0].readyState) {
+    await mongoose.connect(process.env.MONGO_URI);
+  }
+  let spotifyid = context.req.cookies["spotifyid"];
+  let users = await User.find({ id: spotifyid });
+ 
+ 
+  return {
+    props: { users: JSON.parse(JSON.stringify(users))}, // will be passed to the page component as props
+  }
+}

@@ -332,8 +332,9 @@ const PlaylistTracks = ({ user }) => {
   return (
     <div ref={ref} className="text-white min-h-screen mx-4 ">
       <div className="container mx-auto pt-10">
-        <h1 className="text-4xl font-bold mb-10">Playlist Tracks</h1>
-        <div className="">
+        <div className="flex justify-between"><h1 className="text-4xl mx-6 font-bold mb-10 ">Playlist Tracks</h1>
+        <h1 className="text-4xl font-bold mb-10 mx-28">Add Tags</h1></div>
+        <div className="m-4">
           {playlistTracks.map((track) => (
             <div
               key={track.track.id}
@@ -357,7 +358,7 @@ const PlaylistTracks = ({ user }) => {
                     
                     if (item[0] == track.track.id) {
                       return (
-                        <Link href={`/tags/${playlistid}$${item[1].toLowerCase()}`}><span 
+                        <Link href={`/tag/${playlistid}$${item[1] && item[1].toLowerCase()}`}><span 
                         key={reloadkey}
                         className="px-4 text-center pb-1 rounded-full mx-2 bg-gray-400"
                       >

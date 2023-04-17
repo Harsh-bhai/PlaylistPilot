@@ -3,6 +3,7 @@ import { signOut, useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import Usespotify from "@/hooks/usespotify";
 import { useRouter } from "next/router";
+import Cookies from "js-cookie";
 const Createplaylist = () => {
     const spotifyApi = Usespotify();
     const { data: session, status } = useSession();
@@ -10,16 +11,23 @@ const Createplaylist = () => {
 
   const [name, setname] = useState('')
   const [description, setdescription] = useState('')
+  const [reloadkey, setReloadkey] = useState(1)
     const handleSubmit = (e) => {
       e.preventDefault()
       // Handle playlist creation logic here
     }
+    useEffect(() => {
+   handleFormSubmit()
+    }, [reloadkey,spotifyApi])
+    
 
-  const handleFormSubmit = async (e) => {
-    e.preventDefault();
+  const handleFormSubmit = async () => {
+    
+    
 
     try {
-            if ( spotifyApi?.getAccessToken()){
+      console.log(spotifyApi.getAccessToken(),"token")
+            if ( Cookies.get("atoken")){
              const a= await spotifyApi.createPlaylist(name,{description})
              console.log(a,name,description,"hre")
              Router.push(`/addsongs/${a.body.id}`)
@@ -44,7 +52,7 @@ const Createplaylist = () => {
         <div className="flex my-10 space-y-20 flex-col items-center justify-center  py-2">
         <div className=""><h1 className="text-5xl text-white font-semibold ">Create Playlist</h1>
         <p className="text-gray-200 mx-2 my-2">Create your Custom Playlist here...</p></div>
-      <form onSubmit={handleFormSubmit} className="max-w-md w-full">
+      <form onSubmit={(e)=>{e.preventDefault();setReloadkey(Math.random())}} className="max-w-md w-full">
         <div className="mb-4">
           <label htmlFor="name" className="block text-gray-100 font-bold mb-2">
             Playlist Name

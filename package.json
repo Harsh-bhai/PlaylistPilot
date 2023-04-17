@@ -24,9 +24,12 @@
     "react-dom": "18.2.0",
     "react-icons": "^4.7.1",
     "react-modal": "^3.16.1",
+    "react-promise": "^3.0.2",
     "react-toastify": "^9.1.1",
+    "react-tsparticles": "^2.9.3",
     "spotify-web-api-node": "^5.0.2",
     "tailwind-scrollbar-hide": "^1.1.7",
+    "tsparticles": "^2.9.3",
     "typed.js": "^2.0.132"
   },
   "devDependencies": {

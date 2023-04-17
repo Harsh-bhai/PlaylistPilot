@@ -1,7 +1,8 @@
 import { useRouter } from 'next/router'
-import React,{useState} from 'react'
+import React,{useEffect, useState} from 'react'
 import { AiOutlineSearch } from 'react-icons/ai';
 import Usespotify from '@/hooks/usespotify';
+import { useSession } from 'next-auth/react';
 
 const Addsongs = () => {
     const spotifyApi=Usespotify()
@@ -9,26 +10,41 @@ const Addsongs = () => {
     const [searchitem, setSearchitem] = useState()
     const [reloadkey, setReloadkey] = useState(1)
     const [detail, setDetail] = useState([])
+    const [searched, setsearched] = useState(false)
+    const { data: session, status } = useSession();
+
 
     const handleSubmit =async (e) => {
-      e.preventDefault()
+      // e.preventDefault()
       console.log("running")
     //   ['album', 'artist', 'playlist', 'track', 'show', 'episode']
+     try {
+      console.log("trying")
       if(spotifyApi?.getAccessToken()){
+        console.log("inside")
         let a = await spotifyApi.searchTracks(searchQuery,{limit:10,offset:0})
+        console.log(searchQuery,"query")
         setSearchitem(a.body.tracks.items)
         setReloadkey(Math.random())
         console.log(a.body.tracks.items,"here")
+        a.body.tracks?setsearched(true):setsearched(false)
       }
+     } catch (error) {
+      console.log(error)
+     }
     }
     const SongArray=[]
+    useEffect(() => {
+    handleSubmit()
+    }, [reloadkey,session])
+    
     // console.log(SongArray,"songarray")
     const Router= useRouter()
     const {pid}=Router.query
     return (
         <div>
         <div className="mx-auto max-w-6xl flex flex-col items-center justify-center  py-2">
-          <form onSubmit={handleSubmit} className="w-full flex justify-end">
+          <form onSubmit={(e)=>{e.preventDefault();setReloadkey(Math.random())}} className="w-full flex justify-end">
             <div className=" w-full flex space-x-4 justify-center items-center">
               <input
                 id="searchQuery"
@@ -38,7 +54,7 @@ const Addsongs = () => {
                 placeholder="Search tracks, artists, album"
                 className="appearance-none border  w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none rounded-full focus:shadow-outline"
               />
-              <button type="button" onClick={handleSubmit} className='text-white text-3xl bg-transparent border-none'><AiOutlineSearch /></button>
+              <button type="button" onClick={()=>{setReloadkey(Math.random())}} className='text-white text-3xl bg-transparent border-none'><AiOutlineSearch /></button>
             </div>
           </form>
         </div>
@@ -59,7 +75,7 @@ const Addsongs = () => {
     </div>
   ))}
 </div>
-<div className='w-1/5 border-2 flex flex-col text-center border-white'>
+{searched && <div className='w-1/5 border-2 flex flex-col text-center border-white'>
 <h1 className='text-2xl font-semibold m-4'>Playlist Items</h1>
 {detail?.map((item)=>{
 
@@ -70,7 +86,7 @@ const Addsongs = () => {
 </div>
     )
 })}
-    </div>
+    </div>}
 
       </div>
     </div>

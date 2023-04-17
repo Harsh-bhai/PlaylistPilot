@@ -4,6 +4,9 @@ import { useEffect, useState } from "react";
 import Usespotify from "@/hooks/usespotify";
 import Link from "next/link";
 import Cookies from "js-cookie";
+import { FaMusic } from 'react-icons/fa';
+import { AiFillFolderAdd } from 'react-icons/ai';
+import { SiYoutubemusic } from 'react-icons/si';
 const Options = () => {
   const spotifyApi = Usespotify();
   const { data: session, status } = useSession();
@@ -14,6 +17,7 @@ const Options = () => {
       spotifyApi.getUserPlaylists().then((data)=>{
         setPlaylists(data.body.items)
         Cookies.set("spotifyid",spotifyApi.getClientId())
+        Cookies.set("atoken",spotifyApi.getAccessToken())
 
       })
     }
@@ -62,52 +66,28 @@ const Options = () => {
   
 
   return (
-    <div className="min-h-screen text-white flex flex-col space-y-4 items-center">
-      <h1 className="text-5xl font-bold">Options</h1>
-      <h2>Create, Modify your Playlist here ...</h2>
+    <div className="min-h-screen text-white flex flex-col space-y-4 ">
+      <div className="text-center space-y-4 my-10"><h1 className="text-5xl font-bold">Options</h1>
+      <h2>Create, Modify your Playlist here ...</h2></div>
       <section className="text-gray-600 body-font">
         <div className="container px-5 py-24 mx-auto">
-          <div className="flex flex-wrap -m-4">
-            <div className="lg:w-1/4 md:w-1/2 p-4 w-full">
-              <Link href={`/getplaylist`} className="flex justify-center items-center text-white border-2 border-white rounded-lg relative h-48  overflow-hidden">
-               Get playlist here
+          <div className="flex justify-evenly  flex-wrap -m-4">
+            <div className="  w-1/4 hover:scale-110 transition-transform hover:delay-75 ">
+              <Link href={`/getplaylist`} className="flex space-y-4 flex-col justify-center items-center text-white border-2 border-white rounded-lg relative h-48  overflow-hidden">
+              <FaMusic className="text-5xl"/> <span className="text-xl font-semibold">Add Tags to Songs</span>
               </Link>
             </div>
-            <div className="lg:w-1/4 md:w-1/2 p-4 w-full">
-              <Link href={`/createplaylist`} className="flex justify-center items-center text-white border-2 border-white rounded-lg relative h-48  overflow-hidden">
-               Create Playlist
+            <div className=" w-1/4 hover:scale-110 transition-transform hover:delay-75">
+            <Link href={`/createplaylist`} className="flex space-y-4 flex-col justify-center items-center text-white border-2 border-white rounded-lg relative h-48  overflow-hidden">
+              <AiFillFolderAdd className="text-5xl"/> <span className="text-xl font-semibold">Create Playlist</span>
               </Link>
             </div>
-            <div className="lg:w-1/4 md:w-1/2 p-4 w-full">
-              <Link href={`/getplaylist`} className="flex justify-center items-center text-white border-2 border-white rounded-lg relative h-48  overflow-hidden">
-               Get playlist here
+            <div className="  w-1/4 hover:scale-110 transition-transform hover:delay-75">
+            <Link href={`/betafeatures`} className="flex space-y-4 flex-col justify-center items-center text-white border-2 border-white rounded-lg relative h-48  overflow-hidden">
+              <SiYoutubemusic className="text-5xl"/> <span className="text-xl font-semibold">Add other song links</span>
               </Link>
             </div>
-            <div className="lg:w-1/4 md:w-1/2 p-4 w-full">
-              <Link href={`/getplaylist`} className="flex justify-center items-center text-white border-2 border-white rounded-lg relative h-48  overflow-hidden">
-               Get playlist here
-              </Link>
-            </div>
-            <div className="lg:w-1/4 md:w-1/2 p-4 w-full">
-              <Link href={`/getplaylist`} className="flex justify-center items-center text-white border-2 border-white rounded-lg relative h-48  overflow-hidden">
-               Get playlist here
-              </Link>
-            </div>
-            <div className="lg:w-1/4 md:w-1/2 p-4 w-full">
-              <Link href={`/getplaylist`} className="flex justify-center items-center text-white border-2 border-white rounded-lg relative h-48  overflow-hidden">
-               Get playlist here
-              </Link>
-            </div>
-            <div className="lg:w-1/4 md:w-1/2 p-4 w-full">
-              <Link href={`/getplaylist`} className="flex justify-center items-center text-white border-2 border-white rounded-lg relative h-48  overflow-hidden">
-               Get playlist here
-              </Link>
-            </div>
-            <div className="lg:w-1/4 md:w-1/2 p-4 w-full">
-              <Link href={`/getplaylist`} className="flex justify-center items-center text-white border-2 border-white rounded-lg relative h-48  overflow-hidden">
-               Get playlist here
-              </Link>
-            </div>
+          
           </div>
         </div>
       </section>
