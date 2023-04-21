@@ -2,8 +2,7 @@ import React from 'react'
 
 const Viewplaylist = ({users}) => {
   console.log('users',users)
-  const prev=users.users[0].beta
-  console.log("bega",prev)
+
   return (
     <div>
         {/* <div key={item.id} onClick={() => setDetail([...detail, { id: item.id, name: item.name }])} className="rounded-lg overflow-hidden">

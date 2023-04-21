@@ -2,7 +2,8 @@ import React from 'react'
 
 const About = () => {
   return (
-     <div class="lg:-translate-x-10 text-white">
+     <div class="lg:-translate-x-10 text-white m-10 my-16 ">
+          <h1 className='text-5xl font-semibold ml-20 '>About </h1>
           <div class="m-5 lg:m-16 space-y-10 h-screen items-center ">
 
                <div class="sm:flex sm:space-y-0 sm:space-x-8 lg:space-x-16 space-y-4">

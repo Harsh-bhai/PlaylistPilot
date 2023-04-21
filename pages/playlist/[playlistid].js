@@ -328,7 +328,7 @@ const PlaylistTracks = ({ user }) => {
   //   </div>
   // </Modal>
 
-  console.log(playlistTracks);
+  console.log(playlistTracks,"here");
   return (
     <div ref={ref} className="text-white min-h-screen mx-4 ">
       <div className="container mx-auto pt-10">
@@ -354,7 +354,7 @@ const PlaylistTracks = ({ user }) => {
                       .join(", ")}
                   </p>
                   {user[0].tags && user[0].tags[playlistid] && user[0]?.tags[playlistid].map((item) => {
-                    console.log(item, "item");
+                    // console.log(item, "item");
                     
                     if (item[0] == track.track.id) {
                       return (

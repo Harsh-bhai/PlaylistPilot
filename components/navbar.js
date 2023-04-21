@@ -57,7 +57,7 @@ const Navbar = () => {
             <Link  href={"/about"}><div onClick={toggle} className='hover:text-violet-700 text-white cursor-pointer'>About</div></Link>
             {/* <Link  href={"/services"}><div onClick={toggle} className='hover:text-violet-700 text-white cursor-pointer'>Services</div></Link> */}
             <Link  href={"/options"}><div onClick={toggle} className='hover:text-violet-700 text-white cursor-pointer'>Options</div></Link>
-            {session?<div key={reloadkey} onClick={Logout} className='hover:bg-indigo-800 pb-2 text-white cursor-pointer bg-red-500 border-0 py-1 px-3 focus:outline-none rounded-full'>Logout</div>:<Link  href={"/login"}><div onClick={toggle} className='hover:bg-indigo-800 pb-2 text-white cursor-pointer bg-indigo-500 border-0 py-1 px-3 focus:outline-none rounded-full'>Login</div></Link>}
+            {session?<div key={reloadkey} onClick={Logout} className= ' hover:bg-indigo-800 pb-2 text-white cursor-pointer bg-indigo-500 border-0 py-1 px-3 focus:outline-none rounded-full'>Logout</div>:<Link  href={"/login"}><div onClick={toggle} className='hover:bg-indigo-800 pb-2 text-white cursor-pointer bg-indigo-500 border-0 py-1 px-3 focus:outline-none rounded-full'>Login</div></Link>}
           </div>
         </div>
         {/* <button class=" text-white bg-violet-500  mr-40  py-2 px-6 focus:outline-none hover:bg-indigo-700 rounded text-lg">Button</button> */}

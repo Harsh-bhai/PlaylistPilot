@@ -115,7 +115,7 @@ span {
   background: #fff;
   border-radius: 50%;
   box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.1),
-    0 0 0 8px rgba(255, 255, 255, 0.1), 0 0 20px rgba(255, 255, 255, 1);
+    0 0 0 8px rgba(255, 255, 255, 0.1), 0 0 30px rgba(255, 255, 255, 1);
   animation: animate 3s linear infinite;
 }
 span::before {
@@ -132,7 +132,11 @@ span::before {
     transform: rotate(315deg) translateX(0);
     opacity: 1;
   }
-  70% {
+  30% {
+    // transform: rotate(315deg) translateX(0);
+    opacity: 0.1;
+  }
+  50% {
     opacity: 1;
   }
   100% {

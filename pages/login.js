@@ -9,8 +9,8 @@ const Login = ({ providers }) => {
 
   return (
    <div className="text-white">
-     <div className="flex flex-col my-28 items-center text-white space-y-10">
-      <h1 className="text-center text-4xl">Login</h1>
+     <div className="flex flex-col my-28 items-center text-white space-y-14">
+      <h1 className="text-center font-semibold text-5xl">Login</h1>
       {Object.values(providers).map((provider) => {
         return (
           <button
@@ -28,15 +28,15 @@ const Login = ({ providers }) => {
           //       theme: "dark",
           //     });
             }}
-            className="flex mx-auto items-center text-gray-300 bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded-full text-lg"
+            className="flex mx-auto items-center text-gray-300 bg-indigo-500 border-0 py-4 px-12 focus:outline-none hover:bg-indigo-600 rounded-full text-lg"
           >
-            <SlSocialSpotify className="mr-2 text-3xl" /> Login with{" "}
-            {provider.name}
+            <SlSocialSpotify className="mr-2 text-4xl" /> <span className=" font-semibold text-2xl">Login with{" "}
+            {provider.name}</span>
           </button>
         );
       })}
     </div>
-    <div class="lg:-translate-x-10 text-white">
+    <div class="lg:-translate-x-10 m-10 text-white">
           <div class="m-5 lg:m-16 space-y-10 h-screen items-center ">
 
                <div class="sm:flex sm:space-y-0 sm:space-x-8 lg:space-x-16 space-y-4">
