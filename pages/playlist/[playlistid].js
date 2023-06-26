@@ -353,7 +353,7 @@ const PlaylistTracks = ({ user }) => {
                       .map((artist) => artist.name)
                       .join(", ")}
                   </p>
-                  {user[0].tags && user[0].tags[playlistid] && user[0]?.tags[playlistid].map((item) => {
+                  {user[0] && user[0].tags && user[0].tags[playlistid] && user[0]?.tags[playlistid].map((item) => {
                     // console.log(item, "item");
                     
                     if (item[0] == track.track.id) {

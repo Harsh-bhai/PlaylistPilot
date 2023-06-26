@@ -44,10 +44,10 @@ const Options = () => {
           // playlists: { [playlistid]: b.body },
           id: c,
         };
-        // console.log("Data:", data);
+        console.log("Data:", data);
 
         let store = await fetch(
-          `${process.env.NEXT_PUBLIC_BASEURL}/api/getspotifyuser`,
+          `${process.env.NEXT_PUBLIC_BASEURL}/api/addspotifyuser`,
           {
             method: "POST",
             headers: {
