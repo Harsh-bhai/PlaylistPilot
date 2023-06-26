@@ -29,7 +29,7 @@ const Createplaylist = () => {
       console.log(spotifyApi.getAccessToken(),"token")
             if ( Cookies.get("atoken")){
              const a= await spotifyApi.createPlaylist(name,{description})
-             console.log(a,name,description,"hre")
+            //  console.log(a,name,description,"hre")
              Router.push(`/addsongs/${a.body.id}`)
             }
 

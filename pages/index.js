@@ -10,7 +10,7 @@ export default function Home() {
      // console.log(session)
      // console.log()
      const mysession =useSession()
-     console.log(mysession)
+     // console.log(mysession)
      
      
      

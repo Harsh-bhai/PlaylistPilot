@@ -36,7 +36,7 @@ const [refresh_token, setrefreshtoken] = useState()
 
   
   useEffect(() => {
-     console.log("hi i am usestate");
+     // console.log("hi i am usestate");
      const hash = window.location.href;
      let token = Cookies.get("token");
 try {
@@ -65,7 +65,7 @@ try {
 const getRefreshToken= async(  ) => {
   
      
-console.log("getrefreshtoken is here")
+// console.log("getrefreshtoken is here")
        let a = await fetch(`https://accounts.spotify.com/api/token?code=${Cookies.get('token')}&redirect_uri=${redirectURI}&grant_type=authorization_code`,{
           headers: {
                "Authorization": `Basic ${Buffer.from(`${process.env.NEXT_PUBLIC_clientId}:${process.env.NEXT_PUBLIC_client_secret}`).toString('base64')}`,
@@ -74,7 +74,7 @@ console.log("getrefreshtoken is here")
              method:"POST"
        })
        let rtoken=await a.json().refresh_token;
-       console.log(rtoken,"refreshtoken")
+     //   console.log(rtoken,"refreshtoken")
        setrefreshtoken(rtoken)
 
         let b = await fetch(`https://accounts.spotify.com/api/token?refresh_token=${refresh_token}&grant_type=refresh_token`,{

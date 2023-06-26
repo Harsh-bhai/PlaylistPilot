@@ -31,7 +31,7 @@ export default PlaylistTracks
 
 export async function getServerSideProps(context) {
     let {pid}=context.query.pid
-    console.log(pid,"jere")
+    // console.log(pid,"jere")
     return {
       props: {pid}, // will be passed to the page component as props
     }
