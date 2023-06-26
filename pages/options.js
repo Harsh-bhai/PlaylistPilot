@@ -27,11 +27,11 @@ const Options = () => {
     storeDetails();
   }, [])
   
-  console.log(playlists,"plalist")
+  // console.log(playlists,"plalist")
   const storeDetails = async () => {
-    console.log("storedetails is running");
+    // console.log("storedetails is running");
     if (spotifyApi?.getAccessToken()) {
-      console.log(spotifyApi?.getAccessToken(), "apitoken");
+      // console.log(spotifyApi?.getAccessToken(), "apitoken");
       try {
         // console.log("trying");
         let a = await spotifyApi.getMe();
@@ -44,7 +44,7 @@ const Options = () => {
           // playlists: { [playlistid]: b.body },
           id: c,
         };
-        console.log("Data:", data);
+        // console.log("Data:", data);
 
         let store = await fetch(
           `${process.env.NEXT_PUBLIC_BASEURL}/api/addspotifyuser`,
@@ -57,7 +57,7 @@ const Options = () => {
           }
         );
         let sote = await store.json();
-        console.log(sote, "sote", data);
+        // console.log(sote, "sote", data);
       } catch (error) {
         console.log("Error:", error);
       }
@@ -110,7 +110,7 @@ export async function getServerSideProps(context) {
   );
 
   let data = await res.json();
-  console.log(data);
+  // console.log(data);
   return {
     props: { data },
   };

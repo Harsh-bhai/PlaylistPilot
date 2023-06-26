@@ -4,7 +4,7 @@ import { SlSocialSpotify } from "react-icons/sl";
 import { ToastContainer, toast } from "react-toastify";
 
 const Login = ({ providers }) => {
-  console.log(providers, "provider");
+//   console.log(providers, "provider");
 
 
   return (

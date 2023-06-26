@@ -20,7 +20,7 @@ const Getplaylist = () => {
       }
     
     }, [session,spotifyApi])
-    console.log(playlists,"playlist")
+    // console.log(playlists,"playlist")
     
   return (
     <div>

@@ -61,6 +61,7 @@ const Betafeatures = () => {
         </div>
       </div>
     </section>
+    
   </div>
   )
 }

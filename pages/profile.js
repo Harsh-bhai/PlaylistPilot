@@ -17,7 +17,7 @@ const Profile = ({  }) => {
       spotifyApi.getMe().then((e)=>setuser(e.body))
     }
   }, [session,user])
-  console.log(user,"user")
+  // console.log(user,"user")
   
   return (
    <div className=""> <div className=" flex place-content-center place-items-center w-screen h-screen bg-gray-800 overflow-hidden">
