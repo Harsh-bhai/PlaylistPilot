@@ -18,6 +18,7 @@ const Options = () => {
         setPlaylists(data.body.items)
         Cookies.set("spotifyid",spotifyApi.getClientId())
         Cookies.set("atoken",spotifyApi.getAccessToken())
+        Cookies.set("previouslyLoggedIn",true)
 
       })
     }

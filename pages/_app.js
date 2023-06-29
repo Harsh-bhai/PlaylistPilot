@@ -1,14 +1,12 @@
 import '@/styles/globals.css'
 import Navbar from '@/components/navbar'
 import Footer from '@/components/footer'
-import Cookies from 'js-cookie'
 import { useState } from 'react'
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useRouter } from 'next/router'
 import NextNProgress from 'nextjs-progressbar';
 import { SessionProvider } from 'next-auth/react'
-import SongPlayer from '@/components/songplayer'
 import Shootingstar from '@/components/shootingstar'
 
 

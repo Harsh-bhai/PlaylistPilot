@@ -1,42 +1,140 @@
-import React from "react";
+import React, { useState,useEffect } from "react";
 import { getProviders, signIn } from "next-auth/react";
 import { SlSocialSpotify } from "react-icons/sl";
-import { ToastContainer, toast } from "react-toastify";
+import {  toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const Login = ({ providers }) => {
-//   console.log(providers, "provider");
+  //   console.log(providers, "provider");
+  const [registered, setRegistered] = useState(false);
+  const [reloadkey, setReloadkey] = useState(1)
 
+  const handlechange = (e) => {
+    setform({ ...form, [e.target.name]: e.target.value });
+  };
+
+//   useEffect(() => {
+//     setRegistered(true)
+
+//   }, [reloadkey])
+  
+  const handlesubmit = async (e) => {
+     e.preventDefault();
+   
+     try {
+          let a =fetch(`${process.env.NEXT_PUBLIC_BASEURL}/api/register`, {
+               method: "POST",
+               headers: {
+                 "Content-Type": "application/json",
+               },
+               body: JSON.stringify(form),
+             })
+       toast.promise(a
+         ,
+         {
+           pending: 'Registering...',
+           success: 'Registered Successfully',
+           error: 'Failed to Register',
+         }
+       );
+   
+       let response = await a
+     console.log(response)
+       if (response.status===200) {
+          setReloadkey(Math.random())
+         setRegistered(true);
+       } else {
+         setRegistered(false);
+       }
+     } catch (error) {
+       console.log(error)
+     //   setRegistered(false);
+     }
+   };
+   console.log(registered,"hjere")
+
+  const [form, setform] = useState({ name: "", email: "" });
 
   return (
-   <div className="text-white">
-     <div className="flex flex-col my-28 items-center text-white space-y-14">
-      <h1 className="text-center font-semibold text-5xl">Login</h1>
-      {Object.values(providers).map((provider) => {
-        return (
-          <button
-            key={provider.name}
-            onClick={() => {
-              signIn(provider.id, { callbackUrl: "/options",  });
-          //     toast.success("Logged In ", {
-          //       position: "top-right",
-          //       autoClose: 1000,
-          //       hideProgressBar: false,
-          //       closeOnClick: true,
-          //       pauseOnHover: true,
-          //       draggable: true,
-          //       progress: undefined,
-          //       theme: "dark",
-          //     });
-            }}
-            className="flex mx-auto items-center text-gray-300 bg-indigo-500 border-0 py-4 px-12 focus:outline-none hover:bg-indigo-600 rounded-full text-lg"
-          >
-            <SlSocialSpotify className="mr-2 text-4xl" /> <span className=" font-semibold text-2xl">Login with{" "}
-            {provider.name}</span>
+    <div key={reloadkey} className="text-white min-h-screen">
+      <h1 className="text-center font-semibold text-5xl mt-28">Login</h1>
+      <div className="flex flex-col m-16 items-center text-white ">
+       {!registered && <h1 className="text-2xl  md:-translate-x-9">
+          In order to use PlaylistPilot you have to Register with your Username
+          and Email Id.
+        </h1>}
+        { !registered &&
+          <form
+          className="flex lg:w-2/3 w-full sm:flex-row flex-col mx-auto px-8 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end md:mt-20 mb-10"
+          onSubmit={handlesubmit}
+        >
+          <div className="relative flex-grow w-full">
+            <label htmlFor="name" className="leading-7 text-sm text-white">
+              Full Name
+            </label>
+            <input
+              type="text"
+              id="name"
+              value={form.name}
+              onChange={handlechange}
+              name="name"
+              placeholder="Enter any username"
+              className="w-full bg-gray-700 bg-opacity-50 rounded border border-white focus:border-indigo-500 focus:bg-transparent focus:ring-2 focus:ring-indigo-200 text-base outline-none text-white py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+            />
+          </div>
+          <div className="relative flex-grow w-full">
+            <label htmlFor="email" className="leading-7 text-sm text-white">
+              Email
+            </label>
+            <input
+              type="email"
+              id="email"
+              value={form.email}
+              onChange={handlechange}
+              name="email"
+              placeholder="enter spotify email "
+              className="w-full bg-gray-700 bg-opacity-50 rounded border border-white focus:border-indigo-500 focus:bg-transparent focus:ring-2 focus:ring-indigo-200 text-base outline-none text-white py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+            />
+          </div>
+          <button className="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded-full text-lg">
+            Register
           </button>
-        );
-      })}
-    </div>
-    <div className="lg:-translate-x-10 m-10 text-white">
+        </form>
+        }
+
+        {Object.values(providers).map((provider) => {
+          return (
+            registered && (
+              <>
+              <button
+                key={provider.name}
+                onClick={() => {
+                  signIn(provider.id, { callbackUrl: "/options" });
+                  //     toast.success("Logged In ", {
+                  //       position: "top-right",
+                  //       autoClose: 1000,
+                  //       hideProgressBar: false,
+                  //       closeOnClick: true,
+                  //       pauseOnHover: true,
+                  //       draggable: true,
+                  //       progress: undefined,
+                  //       theme: "dark",
+                  //     });
+                }}
+                className="flex mx-auto items-center text-white bg-indigo-500 border-0 py-4 px-12 focus:outline-none hover:bg-indigo-600 rounded-full text-lg"
+              >
+                <SlSocialSpotify className="mr-2 text-4xl" />{" "}
+                <span className=" font-semibold text-2xl">
+                  Import From {provider.name}
+                </span>
+              </button>
+              <h1 className="my-10 text-2xl"> Import your playlist from Spotify </h1>
+              </>
+            )
+          );
+        })}
+      </div>
+      {/* <div className="lg:-translate-x-10 m-10 my-40 text-white">
           <div className="m-5 lg:m-16 space-y-10 h-screen items-center ">
 
                <div className="sm:flex sm:space-y-0 sm:space-x-8 lg:space-x-16 space-y-4">
@@ -124,8 +222,8 @@ const Login = ({ providers }) => {
 
                </div>
           </div>
-     </div>
-   </div>
+     </div> */}
+    </div>
   );
 };
 
