@@ -20,7 +20,7 @@ export default function Home() {
       {/* <Shootingstar/> */}
       <div className="flex flex-col justify-center items-center pt-16 ">
       <div className="flex space-x-10 -translate-x-16">
-          <img src="/logo.svg" alt="" className="h-80 animate-infsymbol" />
+          <img src="/logo.svg" alt="" className="h-72 animate-infsymbol" />
           <div className="flex justify-center items-center flex-col mb-20 relative">
       <div className="flex  font-bold justify-center py-4 pt-20  text-7xl  z-20 bg-clip-text text-transparent bg-gradient-to-tr from-white via-indigo-500 to-white">
         PlayList Pilot
