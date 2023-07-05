@@ -59,13 +59,14 @@ const Login = ({ providers }) => {
     <div key={reloadkey} className="text-white min-h-screen">
       <h1 className="text-center font-semibold text-5xl mt-28">Login</h1>
       <div className="flex flex-col m-16 items-center text-white ">
-       {!registered && <h1 className="text-2xl  md:-translate-x-9">
+       {/* {!registered && <h1 className="text-2xl  md:-translate-x-9"> */}
+       {/* { <h1 className="text-2xl  md:-translate-x-9">
           In order to use PlaylistPilot you have to Register with your Username
           and Email Id.
-        </h1>}
-        { !registered &&
-          <form
-          className="flex lg:w-2/3 w-full sm:flex-row flex-col mx-auto px-8 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end md:mt-20 mb-10"
+        </h1>} */}
+        {/* { !registered && */}
+          {<form
+          className="hidden  lg:w-2/3 w-full sm:flex-row flex-col mx-auto px-8 sm:space-x-4   sm:space-y-0 space-y-4 sm:px-0 items-end md:mt-20 mb-10"
           onSubmit={handlesubmit}
         >
           <div className="relative flex-grow w-full">
@@ -104,7 +105,7 @@ const Login = ({ providers }) => {
 
         {Object.values(providers).map((provider) => {
           return (
-            registered && (
+            // registered && (
               <>
               <button
                 key={provider.name}
@@ -130,7 +131,7 @@ const Login = ({ providers }) => {
               </button>
               <h1 className="my-10 text-2xl"> Import your playlist from Spotify </h1>
               </>
-            )
+            // )
           );
         })}
       </div>
