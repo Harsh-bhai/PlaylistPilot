@@ -60,14 +60,14 @@ else if(status=="unauthenticated")
           <img src="/logo.svg" alt="" />
           {/* <span className="ml-3 text-xl text-white">PlayListPilot</span> */}
         </div></Link>
-        <div ref={ref} className="navitems flex flex-col md:flex-row md:items-center md:bg-inherit bg-slate-800 px-10 py-4 md:py-0 absolute top-0 left-0 transform transition-transform -translate-x-full h-full md:h-auto md:w-full w-2/3 md:static md:translate-x-0  md:transition-none ease-in-out z-20" >
+        <div ref={ref} className="navitems flex flex-col md:flex-row md:items-center md:bg-inherit bg-slate-800 px-10 py-4 md:py-0 absolute top-0 left-0 transform transition-transform -translate-x-full h-full md:h-auto md:w-full w-2/3 md:static md:translate-x-0  md:transition-none ease-in-out z-40 shadow-lg md:shadow-none border-r-2 border-indigo-900 " >
           <span className='absolute top-8 left-8
           'onClick={toggle} ><AiFillCloseCircle className='text-4xl font-extralight md:hidden' /></span>
           <div className="flex flex-col md:flex-row md:items-center md:space-x-8  mainitems my-24 md:my-4 space-y-6 md:space-y-0">
             <Link  href={"/about"}><div onClick={toggle} className='hover:text-violet-700 text-white cursor-pointer'>About</div></Link>
             {/* <Link  href={"/services"}><div onClick={toggle} className='hover:text-violet-700 text-white cursor-pointer'>Services</div></Link> */}
             {authenticated && <Link  href={"/options"}><div onClick={toggle} className='hover:text-violet-700 text-white cursor-pointer'>Options</div></Link>}
-            {session?<div key={reloadkey} onClick={Logout} className= ' hover:bg-indigo-800 pb-2 text-white cursor-pointer bg-indigo-500 border-0 py-1 px-3 focus:outline-none rounded-full'>Logout</div>:<Link  href={"/login"}><div onClick={toggle} className='md:hover:bg-indigo-800 pb-2 text-white cursor-pointer md:bg-indigo-500 border-0 py-1 md:px-3 focus:outline-none rounded-full'>Login</div></Link>}
+            {session?<div key={reloadkey} onClick={Logout} className= ' hover:bg-indigo-800 pb-2 text-white cursor-pointer md:bg-indigo-500 border-0 py-1 md:px-3 focus:outline-none rounded-full'>Logout</div>:<Link  href={"/login"}><div onClick={toggle} className='md:hover:bg-indigo-800 pb-2 text-white cursor-pointer md:bg-indigo-500 border-0 py-1 md:px-3 focus:outline-none rounded-full'>Login</div></Link>}
           </div>
         </div>
         {/* <button class=" text-white bg-violet-500  mr-40  py-2 px-6 focus:outline-none hover:bg-indigo-700 rounded text-lg">Button</button> */}

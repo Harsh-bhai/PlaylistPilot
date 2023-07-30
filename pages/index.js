@@ -1,4 +1,3 @@
-import Shootingstar from "@/components/shootingstar";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 // SlSocialSpotify
@@ -19,13 +18,13 @@ export default function Home() {
           <div className="min-h-screen bg-gray-800 flex flex-col items-center space-y-4">
       {/* <Shootingstar/> */}
       <div className="flex flex-col justify-center items-center pt-16 ">
-      <div className="flex space-x-10 -translate-x-16">
-          <img src="/logo.svg" alt="" className="h-72 animate-infsymbol" />
+      <div className="flex space-x-10 md:-translate-x-16">
+          <img src="/logo.svg" alt="" className="h-40 md:h-72 animate-infsymbol" />
           <div className="flex justify-center items-center flex-col mb-20 relative">
-      <div className="flex  font-bold justify-center py-4 pt-20  text-7xl  z-20 bg-clip-text text-transparent bg-gradient-to-tr from-white via-indigo-500 to-white">
+      <div className="flex  font-bold justify-center py-4 pt-20  text-4xl md:text-7xl  z-20 bg-clip-text text-transparent bg-gradient-to-tr from-white via-indigo-500 to-white">
         PlayList Pilot
       </div>
-      <p className="flex-wrap text-lg  mr-10 font-semibold mx-2 absolute translate-y-[6.5rem] text-gray-300 pb-2">
+      <p className="flex-wrap text-lg  md:mr-10 font-semibold mx-2 absolute translate-y-[6.5rem] text-gray-300 pb-2 hidden md:block">
       Organize your music - with the power of TAGS 
       </p>
       

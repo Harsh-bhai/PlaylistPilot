@@ -36,7 +36,7 @@ export default function App({ Component, pageProps:{session,...pageProps} }) {
   return <>
  <SessionProvider session={session}>
  <Navbar  />
- <Shootingstar/>
+ {/* <Shootingstar className="hidden md:block"/> */}
   <ToastContainer
 position="top-right"
 autoClose={1000}
