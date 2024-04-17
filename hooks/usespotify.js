@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 
 const Usespotify = () => {
   const router=useRouter()
-const { data: session, status } = useSession();
+const { data: session } = useSession();
   const spotifyApi = new SpotifyWebApi({
     clientId: process.env.NEXT_PUBLIC_clientId,
     clientSecret: process.env.NEXT_PUBLIC_client_secret,
