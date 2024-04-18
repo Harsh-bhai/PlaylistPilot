@@ -1,31 +1,22 @@
 import React, { useEffect, useRef, useState } from "react";
-import Modal from "react-modal";
 import Usespotify from "@/hooks/usespotify";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import mongoose from "mongoose";
 import Spotifyuser from "@/model/Spotifyuser";
-import Cookies from "js-cookie";
 import Link from "next/link";
 
 const PlaylistTracks = ({ user }) => {
   console.log("users", user);
-  Modal.setAppElement("#__next");
-  // console.log(song, "song");
   const spotifyApi = Usespotify();
 
   const { data: session, status } = useSession();
   const [playlistTracks, setPlaylistTracks] = useState([]);
   const [atoken, setAtoken] = useState();
   const [isThereTag, setIsThereTag] = useState(false);
-  const [tagarray, setTagarray] = useState([]);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [fetchyes, setFetchyes] = useState(false);
-  const [shouldRunEffect, setShouldRunEffect] = useState(true);
   const [ifuser, setIfuser] = useState(false)
 
   const [reloadkey, setReloadkey] = useState(1);
-  // const [accesstoken, setAccesstoken] = useState('')
   const router = useRouter();
   const { playlistid } = router.query;
   const ref = useRef();
@@ -47,7 +38,6 @@ const PlaylistTracks = ({ user }) => {
     if(user[0]){
       setIfuser(true)
     }
-    // retriveData()
   }, [session]);
 
   useEffect(() => {
@@ -84,54 +74,6 @@ const PlaylistTracks = ({ user }) => {
       setIsThereTag(false)
   }
 
-  // const handleModalToggle = () => {
-  //   setIsModalOpen(!isModalOpen);
-  // };
-
-  // const retriveData = async () => {
-  //   try {
-  //     //  const spotifyapi=Usespotify()
-  //     //  let atoken=spotifyapi.getAccessToken()
-  //     console.log("check is working");
-  //     const url = `https://api.spotify.com/v1/playlists/${playlistid}`;
-
-  //     // Set up authorization headers with your Spotify API access token
-  //     let response = await fetch(url, {
-  //       method: "GET",
-  //       headers: {
-  //         Authorization: `Bearer ${atoken}`,
-  //         "Content-Type": "application/json",
-  //       },
-  //     });
-  //     let datas = await response.json();
-
-  //     console.log("trying");
-  //     let data = datas.description || [];
-  //     data = data.replaceAll("&#x27;", "'");
-  //     data = data.replaceAll("&quot;", `"`);
-  //     data = data.replaceAll(`"`, `'`);
-  //     data = data.replaceAll(`'`, `"`);
-  //     // console.log(data)
-  //     setIsThereTag(true);
-  //     setTagarray(JSON.parse(data));
-  //     setReloadkey(Math.random())
-  //     console.log(tagarray, "superman");
-
-  //     // console.log("data is here", JSON.parse(data));
-  //   } catch (error) {
-  //     console.log("error :",error);
-  //   }
-  // };
-
-  // const toggleblur = () => {
-  //   if (ref.current.classList.contains("blur-0")) {
-  //     ref.current.classList.remove("blur-0");
-  //     ref.current.classList.add("blur-sm");
-  //   } else if (ref.current.classList.contains("blur-sm")) {
-  //     ref.current.classList.remove("blur-sm");
-  //     ref.current.classList.add("blur-0");
-  //   }
-  // };
 
   const storeDetails = async () => {
     let data = user[0]
@@ -140,14 +82,8 @@ const PlaylistTracks = ({ user }) => {
     if (spotifyApi?.getAccessToken()) {
       console.log(spotifyApi?.getAccessToken(), "apitoken");
       try {
-        // console.log("trying");
-        // let a = await spotifyApi.getMe();
-        // console.log("a", a.body);
         let b = await spotifyApi.getPlaylist(playlistid);
-        // console.log("b", b.body);
-        // let c = await spotifyApi.getClientId();
           data.playlists= { [playlistid]: b.body };
-        // console.log("Data:", data);
 
         let store = await fetch(
           `${process.env.NEXT_PUBLIC_BASEURL}/api/updatespotifyuser`,
@@ -167,7 +103,6 @@ const PlaylistTracks = ({ user }) => {
     }
   };
 
-  // console.log(tagarray, "tagarary");
   function filterUnique(arr) {
     // create a new array to store the unique arrays
     let uniqueArr = [];
@@ -253,80 +188,10 @@ const PlaylistTracks = ({ user }) => {
     let don = await done.json();
     console.log(don, "don");
     
-    // Find the index of the track with the matching track ID
-    // const trackIndex = data.tracks.items.findIndex(
-    //   (item) => item.track.id === trackId
-    // );
 
-    // // Add or update the tags for the track, if it exists
-    // if (trackIndex !== -1) {
-    //   let prevTags = data.description || "[]";
-    //   prevTags = prevTags.replaceAll("&#x27;", "'");
-    //   prevTags = prevTags.replaceAll("&quot;", `"`);
-    //   prevTags = prevTags.replaceAll(`"`, `'`);
-    //   prevTags = prevTags.replaceAll(`'`, `"`);
-
-    //   console.log(JSON.parse(prevTags), "prevtags");
-
-    //   console.log("trackindex found");
-    //   try {
-    //     prevTags = JSON.parse(prevTags);
-    //     prevTags.push([trackId, tags]);
-    //     prevTags = filterUnique(prevTags);
-    //     console.log("trying", prevTags);
-    //     let final = await fetch(url, {
-    //       method: "PUT",
-    //       headers: {
-    //         Authorization: `Bearer ${atoken}`,
-    //         "Content-Type": "application/json",
-    //       },
-    //       body: JSON.stringify({ description: JSON.stringify(prevTags) }),
-    //     });
-    //     let a = await final.json();
-    //     console.log("huge success", a);
-    //   } catch (error) {
-    //     console.log("not done error =>", error);
-    //   }
-    // }
   };
 
-  // Modal example is here
 
-  //   <Modal
-  //   isOpen={isModalOpen}
-  //   onRequestClose={handleModalToggle}
-  //   className="w-1/2 h-1/2 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 "
-  //   overlayClassName="fixed inset-0 bg-gray-700 h-1/2 w-1/2 m-auto rounded-lg bg-opacity-50 shadow-lg"
-  //   contentLabel="Example Modal"
-  // >
-  //   <h2 className="text-2xl font-bold mb-4 text-center text-white">
-  //     Wanna add TAGS here?
-  //   </h2>
-  //   {/* <p className="text-gray-600">Modal Content</p> */}
-  //   <div className="flex justify-center space-x-10">
-  //     <button
-  //       className="rounded-full mt-4 py-2 px-8 bg-blue-500 text-white  hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50"
-  //       onClick={() => {
-  //         handleModalToggle();
-  //         toggleblur();
-  //         setFetchyes(true);
-  //         storeDetails();
-
-  //       }}
-  //     >
-  //       Yes
-  //     </button>
-  //     <button
-  //       className="rounded-full mt-4 py-2 px-8 bg-blue-500 text-white  hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50"
-  //       onClick={() => {
-  //         handleModalToggle();
-  //         toggleblur();
-  //       }}
-  //     >
-  //       No
-  //     </button>
-  //   </div>
-  // </Modal>
 
   console.log(playlistTracks,"here");
   return (
@@ -354,7 +219,6 @@ const PlaylistTracks = ({ user }) => {
                       .join(", ")}
                   </p>
                   {user[0] && user[0].tags && user[0].tags[playlistid] && user[0]?.tags[playlistid].map((item) => {
-                    // console.log(item, "item");
                     
                     if (item[0] == track.track.id) {
                       return (
@@ -373,7 +237,6 @@ const PlaylistTracks = ({ user }) => {
               </div>
               <div className="flex">
                 <div className="relative mb-10 flex space-x-3">
-                  {/* <label for="tags" className="leading-7 text-sm text-gray-600">tags</label> */}
                   <button
                     className="flex-shrink-0 text-white bg-indigo-500 border-0 
                      px-4  focus:outline-none hover:bg-indigo-600 rounded sm:mt-0"
@@ -423,7 +286,6 @@ export async function getServerSideProps(context) {
   let spotifyid = context.req.cookies["spotifyid"];
   console.log(spotifyid, "sid");
   let user = await Spotifyuser.find({ id: spotifyid });
-  // console.log("users",user)
 
   return {
     props: { user: JSON.parse(JSON.stringify(user)) },

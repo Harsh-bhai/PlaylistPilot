@@ -7,8 +7,8 @@ const refreshAccessToken = async (token) => {
     spotifyApi.setAccessToken(token.accessToken);
     spotifyApi.setRefreshToken(token.refreshToken);
 
-    const { body: refreshedToken } = spotifyApi.getAccessToken();
-    console.log("refreshed Token in ", refreshedToken);
+  const {body:refreshedToken} =await spotifyApi.refreshAccessToken();
+    console.log("refreshed Token in ", yum);
     return {
       ...token,
       accessToken: refreshedToken.access_token,
@@ -55,6 +55,8 @@ export const authOptions = {
         console.log("EXISTING ACCESS TOKEN IS VALID");
         return token;
       }
+
+      //access token expired so we need to refresh it
       console.log("EXISTING ACCESS TOKEN IS NOT VALID");
       return await refreshAccessToken(token);
     },

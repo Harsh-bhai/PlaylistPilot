@@ -5,13 +5,12 @@ import Usespotify from "@/hooks/usespotify";
 import Link from "next/link";
 import Cookies from "js-cookie";
 import { FaMusic } from 'react-icons/fa';
-import { AiFillFolderAdd } from 'react-icons/ai';
-import { SiYoutubemusic } from 'react-icons/si';
 const Options = () => {
   const spotifyApi = Usespotify();
   const { data: session, status } = useSession();
   const [playlists, setPlaylists] = useState([]);
 
+  // setting spoitify id and access token in cookies
   useEffect(() => {
     if ( spotifyApi.getAccessToken()){
       spotifyApi.getUserPlaylists().then((data)=>{
@@ -22,30 +21,22 @@ const Options = () => {
 
       })
     }
-  
   }, [session,spotifyApi])
+
   useEffect(() => {
     storeDetails();
   }, [])
   
-  // console.log(playlists,"plalist")
+  // adding user details in mongodb
   const storeDetails = async () => {
-    // console.log("storedetails is running");
     if (spotifyApi?.getAccessToken()) {
-      // console.log(spotifyApi?.getAccessToken(), "apitoken");
       try {
-        // console.log("trying");
         let a = await spotifyApi.getMe();
-        // console.log("a", a.body);
-        // let b = await spotifyApi.getPlaylist(playlistid);
-        // console.log("b", b.body);
         let c = await spotifyApi.getClientId();
         let data = {
           userinfo: a.body,
-          // playlists: { [playlistid]: b.body },
           id: c,
         };
-        // console.log("Data:", data);
 
         let store = await fetch(
           `${process.env.NEXT_PUBLIC_BASEURL}/api/addspotifyuser`,
@@ -57,8 +48,6 @@ const Options = () => {
             body: JSON.stringify(data),
           }
         );
-        let sote = await store.json();
-        // console.log(sote, "sote", data);
       } catch (error) {
         console.log("Error:", error);
       }
@@ -78,17 +67,6 @@ const Options = () => {
               <FaMusic className="text-5xl"/> <span className="text-xl font-semibold">Add Tags to Songs</span>
               </Link>
             </div>
-            {/* <div className=" w-1/4 hover:scale-110 transition-transform hover:delay-75">
-            <Link href={`/createplaylist`} className="flex space-y-4 flex-col justify-center items-center text-white border-2 border-white rounded-lg relative h-48  overflow-hidden">
-              <AiFillFolderAdd className="text-5xl"/> <span className="text-xl font-semibold">Create Playlist</span>
-              </Link>
-            </div>
-            <div className="  w-1/4 hover:scale-110 transition-transform hover:delay-75">
-            <Link href={`/betafeatures`} className="flex space-y-4 flex-col justify-center items-center text-white border-2 border-white rounded-lg relative h-48  overflow-hidden">
-              <SiYoutubemusic className="text-5xl"/> <span className="text-xl font-semibold">Add other song links</span>
-              </Link>
-            </div> */}
-          
           </div>
         </div>
       </section>
@@ -97,22 +75,3 @@ const Options = () => {
 };
 
 export default Options;
-
-export async function getServerSideProps(context) {
-  const token = context.req.cookies["token"];
-  // console.log(token)
-
-  let res = await fetch(
-    "https://api.spotify.com/v1/search?query=Atif Aslam&type=artist",
-    {
-      headers: { Authorization: `Bearer ${token}` },
-      // params:{q:}
-    }
-  );
-
-  let data = await res.json();
-  // console.log(data);
-  return {
-    props: { data },
-  };
-}
